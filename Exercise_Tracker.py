@@ -22,22 +22,19 @@ def registration():
         weight = int(input("Please enter your weight in Kg: "))
         email_address = str(input("Please enter your email address:  "))
         intensity  =  str(input("Please enter Exercise intensity level (high or intense):  "))
-        client_ID = (user_name_first[0:3] + user_name_last[-2:]).upper
+        client_ID = (user_name_first[0:3] + user_name_last[-2:]).upper()
+        
         #Print summary of input information    
         print("-----------------------------------")
         print("Below is SUMMARY of your REGISTRATION INFO")
         print("-----------------------------------")
         print("Your first name is: " + str(user_name_first))
         check1 = str(input("Press (c) to confirm or any key to edit!"))
-        if check1 == 'c':
-            continue
-        else:
+        if check1 != 'c':
             user_name_first = str(input("Please enter your first name: "))
         print("Your last name is: " + str(user_name_last))    
         check1 = str(input("Press (c) to confirm or any key to edit!"))
-        if check1 == 'c':
-            continue
-        else:
+        if check1 != 'c':
             user_name_last = str(input("Please enter your first name: "))
     
 registration()
