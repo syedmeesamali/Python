@@ -29,14 +29,28 @@ def registration():
         print("Below is SUMMARY of your REGISTRATION INFO")
         print("-----------------------------------")
         print("Your first name is: " + str(user_name_first))
-        check1 = str(input("Press (c) to confirm or any key to edit!"))
-        if check1 != 'c':
+        check1 = str(input("Press (e) to edit or any key to confirm!"))
+        if check1 == 'e':
             user_name_first = str(input("Please enter your first name: "))
         print("Your last name is: " + str(user_name_last))    
-        check1 = str(input("Press (c) to confirm or any key to edit!"))
-        if check1 != 'c':
-            user_name_last = str(input("Please enter your first name: "))
-    
+        check1 = str(input("Press (e) to edit or any key to confirm!"))
+        if check1 == 'e':
+            user_name_last = str(input("Please enter your last name: "))
+            client_ID = (user_name_first[0:3] + user_name_last[-2:]).upper()
+        print("Your age is: " + str(age))    
+        if check1 == 'e':
+            age = str(input("Please enter your age: "))
+        print("Your height is: " + str(height))    
+        if check1 == 'e':
+            height = str(input("Please enter your height in cm: "))
+        print("Your email address is: " + str(email_address))    
+        if check1 == 'e':
+            email_address = str(input("Please enter your email address: "))
+        print("Your intensity level chosen is: " + str(intensity))    
+        if check1 == 'e':
+            intensity  =  str(input("Please enter Exercise intensity level (high or intense):  "))
+
+
 registration()
 
 def print_Summary():
