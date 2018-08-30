@@ -36,17 +36,21 @@ def registration():
         check1 = str(input("Press (e) to edit or any key to confirm!"))
         if check1 == 'e':
             user_name_last = str(input("Please enter your last name: "))
-            client_ID = (user_name_first[0:3] + user_name_last[-2:]).upper()
+        client_ID = (user_name_first[0:3] + user_name_last[-2:]).upper()
         print("Your age is: " + str(age))    
+        check1 = str(input("Press (e) to edit or any key to confirm!"))
         if check1 == 'e':
             age = str(input("Please enter your age: "))
         print("Your height is: " + str(height))    
+        check1 = str(input("Press (e) to edit or any key to confirm!"))
         if check1 == 'e':
             height = str(input("Please enter your height in cm: "))
-        print("Your email address is: " + str(email_address))    
+        print("Your email address is: " + str(email_address))
+        check1 = str(input("Press (e) to edit or any key to confirm!"))
         if check1 == 'e':
             email_address = str(input("Please enter your email address: "))
-        print("Your intensity level chosen is: " + str(intensity))    
+        print("Your intensity level chosen is: " + str(intensity))
+        check1 = str(input("Press (e) to edit or any key to confirm!")) 
         if check1 == 'e':
             intensity  =  str(input("Please enter Exercise intensity level (high or intense):  "))
 
