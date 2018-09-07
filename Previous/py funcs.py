@@ -22,6 +22,7 @@ def password(length):
         pw = pw + random.choice(chars)
     return pw
 
+#Below function calculates factorial of a number
 def factorial(n):
    if n == 0:
      return 1
@@ -30,3 +31,29 @@ def factorial(n):
      for i in range(1, n+1):
        N = N * i
      return(N)
+
+#Below function counts the characters in a word
+def count_letters(word, char):
+    count = 0
+    while count <= len(word):
+        for char in word:
+            if char == word[count]:
+                count += 1
+            return count
+
+#Count the number for each character occurence in string and save in dictionary
+def counter(input_string):
+	dict1={}
+	for x in input_string:
+	    dict1[x] = dict1.setdefault(x,0)+1
+	return dict1
+
+#Function to count most frequent letter in dictionary
+def most_frequent_letter(input_dict):
+    maximum = 0
+    letter_maximum = ""
+    for letter in input_dict:
+        if input_dict[letter] > maximum:
+            maximum = input_dict[letter]
+            letter_maximum = letter
+    return letter_maximum
