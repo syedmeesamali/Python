@@ -57,3 +57,13 @@ def most_frequent_letter(input_dict):
             maximum = input_dict[letter]
             letter_maximum = letter
     return letter_maximum
+
+#Below function can be used to calculate distance between two points x,y
+import math
+
+def distance(x, y):
+   distance = math.sqrt( ((x[0]-y[0])**2)+((x[1]-y[1])**2) )
+   return distance
+x=(0,0)
+y=(1,1)
+print(distance(x,y))
