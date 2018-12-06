@@ -1,23 +1,19 @@
 import copy
-
 class Polynomial(object):
     def __init__(self,coefficients):
         self.coeffs = coefficients
-
-    def add(self,other):      
+    def add(self,other):   
         longer = copy.copy(self.coeffs) if len(self.coeffs)-len(other.coeffs) >= 0 else (other.coeffs)
-        shorter = other.coeffs if len(self.coeffs)-len(other.coeffs) >= 0 else self.coeffs
+        shorter = other.coeffs if len(self.coeffs)-len(other.coeffs) >= 0 else (self.coeffs)
         start_index = len(longer) - len(shorter)
         count = 0
         for i in shorter:
-          longer[start_index+count] = i + longer[start_index+count]
+          longer[start_index + count] = i + longer[start_index + count]
           count+=1
         return Polynomial(longer)
-
     def __add__(self, other):
         return self.add(other)
     #__radd__ doesnt work.also doesn't work for integer+polynomial multiplication
-                
     def __repr__(self):  
         ret = ""
         num = 0
@@ -30,10 +26,8 @@ class Polynomial(object):
             ret = ("{:.3f}".format(x) + " z**" + str(num) + " + ") + ret
           num+=1
         return ret
-
     def __str__(self):   
         return self.__repr__()
-
     def val(self, v):
           n=len(self.coeffs)-1
           tmp = 0
@@ -41,10 +35,8 @@ class Polynomial(object):
             tmp = tmp + float(co*(v**n)) 
             n -= 1 
           return tmp 
-
     def __call__(self, v):
         return self.val(v)    
-    
     def roots(self):
         if len(self.coeffs) == 3:
           d = (((self.coeffs[1]**2) - (4*self.coeffs[0]*self.coeffs[2]) + 0j)**0.5)
@@ -89,7 +81,6 @@ class Polynomial(object):
     
             
 def main():
-  
   p1 = Polynomial([1,2,3])
   print("p1:",p1)
   p2 = Polynomial([100,200])
@@ -99,13 +90,14 @@ def main():
   print("value of p2 when v=-1:",p1(-1))
   print("value of p1+p2 when v=10:",(p1 + p2)(10))
   print("p1*p2: ",p1*p2)
-  print("p1*p2+p1: ",(p1*p2+p1))
+  #print("p1*p2+p1: ",(p1*p2+p1))
   p3=Polynomial([3,2,-1])
-  print("roots of p1*p2:"),(p1*p2).roots()
+  #print("roots of p1*p2:"),(p1*p2).roots()
   print("roots of p3:"),p3.roots()
   print("roots of p2:"),p2.roots()
-  print(" roots of p1:"),p1.roots() #giving me floating point error, when i'm putting it into a list. doesn't give this error if i print it as a separatalety, like not in list
-  print("roots of p2+p3:"),(p2+p3).roots()
-  print(p1*8)
+  print(" roots of p1:"),p1.roots()
+  #giving me floating point error, when i'm putting it into a list. doesn't give this error if i print it as a separatalety, like not in list
+  #print("roots of p2+p3:"),(p2+p3).roots()
+  #print(p1*8)
 
 main()
