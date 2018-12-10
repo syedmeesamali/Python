@@ -51,8 +51,6 @@ class Polynomial(object):
         return self.sub(other)
     def __rsub__(self,other): #runs when integer-polynomial given
         return self.__sub__(other)
-    
-        
         
     def __repr__(self):
         # repr is a method that returns a basic string representation of a Polynomial.
@@ -71,7 +69,6 @@ class Polynomial(object):
             ret = ("{:.3f}".format(x) + "z + ") + ret
           else:
             ret = ("{:.3f}".format(x) + " z**" + str(num) + " + ") + ret
-            
           num+=1
           
         return ret
