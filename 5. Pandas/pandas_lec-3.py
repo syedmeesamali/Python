@@ -25,4 +25,8 @@ def CreateDataSet(Number = 1):
 
         Output.extend(zip(random_states, random_status, data, rng))
     return Output
-                                
+
+dataset = CreateDataSet(4)
+df = pd.DataFrame(data=dataset, columns=['State', 'Status', 'CustomerCount', 'StatusDate'])
+#print(df.info())
+print(df.head())
