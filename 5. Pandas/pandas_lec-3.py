@@ -50,6 +50,21 @@ mask = df.State == 'NJ'
 df['State'][mask] = 'NY'
 
 print(df['State'].unique())
+df['CustomerCount'].plot(figsize=(15,5));
+#plt.show()
+sortdf = df[df['State'] == 'NY'].sort_index(axis=0)
+print(sortdf.head(10))
+
+Daily = df.reset_index().groupby(['State', 'StatusDate']).sum()
+print(Daily.head())
+
+del Daily['Status']
+print(Daily.head())
+
+Daily.loc['FL']['2012':].plot()
+plt.show()
+          
+                                  
 
 
 
