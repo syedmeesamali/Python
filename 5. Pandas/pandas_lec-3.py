@@ -28,5 +28,29 @@ def CreateDataSet(Number = 1):
 
 dataset = CreateDataSet(4)
 df = pd.DataFrame(data=dataset, columns=['State', 'Status', 'CustomerCount', 'StatusDate'])
-#print(df.info())
 print(df.head())
+
+Location = r'C:\Users\SYED\Desktop\Python\5. Pandas\Lesson3.xls'
+df = pd.read_excel(Location, 0, index_col = 'StatusDate')
+print(df.dtypes)
+
+#Prepare data
+# 1. Make sure the state column is all in upper case
+# 2. Only select records where account status is equal to "1"
+# 3. Merge (NJ and NY) to NY in the state column
+# 4. Remove any outliers (any odd results in the data set)
+
+print(df['State'].unique())
+df['State'] = df.State.apply(lambda x: x.upper())
+
+print(df['State'].unique())
+mask = df['Status'] == 1
+df = df[mask]
+mask = df.State == 'NJ'
+df['State'][mask] = 'NY'
+
+print(df['State'].unique())
+
+
+
+
