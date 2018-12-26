@@ -63,9 +63,21 @@ print(Daily.head())
 
 Daily.loc['FL']['2012':].plot()
 plt.show()
-          
-                                  
 
+print(Daily.index)
 
+print(Daily.index.levels[0])
 
+StateYearMonth = Daily.groupby([Daily.index.get_level_values(0), Daily.index.get_values(1).year,
+                                Daily.index.get_level_values(1).month])
+Daily['Lower'] = StateYearMonth['CustomerCount'].transform( lambda x: x.quantile(q=0.25) - (1.5*x.quantile(q=0.75)-x.quantile(q=0.25)) )
+Daily['Upper'] = StateYearMonth['CustomerCount'].transform( lambda x: x.quantile(q=0.75) - (1.5*x.quantile(q=0.75)-x.quantile(q=0.25)) )
+Daily['Outlier'] = (Daily['CustomerCount'] < Daily['Lower']) | (Daily['CustomerCount'] > Daily['Upper'])
 
+Daily = Daily[Daily['Outlier'] == False]
+
+ALL = pd.DataFrame(Daily['CustomerCount'].groupby(Daily.index.get_level_values(1)).sum())
+ALL.columns = ['CustomerCount']
+
+YearMonth = ALL.groupby([lambda x:x.year, lambda x:x.month])
+print(ALL.head())
