@@ -1,7 +1,8 @@
 import hashlib
 import json
 
-import textwrap import dedent
+import textwrap
+import dedent
 from time import time
 from uuid import uuid4
 
@@ -96,20 +97,50 @@ class BlockChain(object):
         guess_hash = hashlib.sha256(guess).hexdigest()
         return guess_hash[:4] == "0000"
     
-    # Instantiate our Node
+    #---------------------------------------
+    #-------------FLASK AREA ---------------
+    #---------------------------------------
 
+    # Instantiate our Node
     app = Flask(__name__)
 
     #Generate a globally unique address for this node
-
     node_identifier = str(uuid4()).replace('-', '')
 
     #Instantiate the Blockchain
     blockchain = Blockchain()
 
+
     @app.route('/mine', methods=['GET'])
     def mine():
-        return "we'll mine a new block"
+        #we run proof of work to get the next proof of work
+
+        last_block = blockchain.last_block
+        last_proof = last_block['proof']
+        proof = blockchain.proof_of_work(last_proof)
+
+        #we must receive reward for finding the proof.
+        #the sender is "0" to signify that this node has mined a new coin
+
+        blockchain.new_transaction(
+            sender = "0",
+            recipient = node_identifier,
+            amount = 1,
+            )
+        #Forget the new block by adding it to the chain
+
+        previous_hash = blockchain.hash(last_block)
+        block = blockchain.new_block(proof, previous_hash)
+
+        response = {
+            'message': "New Block Forged",
+            'index': block['index'],
+            'transactions': block['transactions'],
+            'proof': block['proof'],
+            'previous_hash': block['previous_hash'],
+            }
+
+        return jsonify(response), 200
 
     @app.route('/transactions/new', methods=['POST'])
     def new_transaction():
@@ -122,7 +153,6 @@ class BlockChain(object):
         response = {'message': f'Transaction will be added to block {index}'}
         return jsonify(response), 201
     
-        return "we will add a new transaction"
 
     @app.route('/chain', methods=['GET'])
     def full_chain():
@@ -137,5 +167,3 @@ class BlockChain(object):
 
     @app.route('/transactions/new', methods=['POST'])
     
-
-
