@@ -10,11 +10,12 @@ from flask import Flask, jsonify, request
 class BlockChain(object):
 
     def __init__(self):
-        self.chain = []
+
         self.current_transactions = []
+        self.chain = []
 
         #create the genesis block
-        self.new_block(previous_hash=1, proof=100)
+        self.new_block(previous_hash = 1, proof = 100)
 
     def new_block(self, proof, previous_hash=None):
         """Creates a new block in the Blockchain
@@ -56,6 +57,7 @@ class BlockChain(object):
         #returns last block in the chain as of now
         return self.chain[-1]
 
+    @staticmethod
     def hash(block):
         """
         Creates a SHA-256 hash of a Block
@@ -142,7 +144,7 @@ def new_transaction():
     values = request.get_json()
     required = ['sender', 'recipient', 'amount']
     if not all(k in values for k in required):
-        return "Missing Values", 400
+        return 'Missing Values', 400
 
     index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
     response = {'message': f'Transaction will be added to block {index}'}
