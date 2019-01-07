@@ -1,6 +1,6 @@
 <hmtl>
     <head>
-        <title>Is it new year?</title>
+        <title><h1>Names</h1></title>
         <style>
         .body {
             text-align: center;
@@ -9,10 +9,10 @@
     </head>
 
 <body>
-    {% if new_year %}
-        <h1> Yes! Happy new year !</h1>
-    {% else %}
-        <h1> NO it's not new year guys ! </h1>
-    {% endif %}
+    <ul>
+        {% for name in names %}
+         <li>  {{ name }} </li>
+         {% endfor %}
+    </ul>
 </body>
 </hmtl>
