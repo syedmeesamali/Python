@@ -1,11 +1,4 @@
-inputfile = "dna.txt"
-f = open(inputfile, "r")
-seq = f.read()
-seq.replace("\n","")
-seq.replace("\r","")
-
-def translate(seq):
-    table = {
+table = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
     'AAC':'N', 'AAT':'N', 'AAA':'K', 'AAG':'K',
@@ -22,13 +15,4 @@ def translate(seq):
     'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
     'TAC':'Y', 'TAT':'Y', 'TAA':'_', 'TAG':'_',
     'TGC':'C', 'TGT':'C', 'TGA':'_', 'TGG':'W',
-    }
-
-    protein = ""
-
-    #check if the sequence is divisible by 3 (our pairs above)
-    if len(seq) % 3 == 0:
-        for i in range(0, len(seq), 3):
-            codon = seq[i:i+3]
-            protein += table[codon]
-    return protein
+}
