@@ -5,6 +5,11 @@ seq.replace("\n","")
 seq.replace("\r","")
 
 def translate(seq):
+    """Docstring of function
+    Translate a string containing a nucleotide sequence into a string containing
+    the corresponding sequence of amino acids. Nucleotides are translated in triplets
+    using the table dictionary; each amino acid is encoded with a string of length 1."""
+    
     table = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
