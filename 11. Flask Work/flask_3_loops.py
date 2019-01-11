@@ -8,7 +8,7 @@ def index():
     return render_template("index.html", names = names)
 
 @app.route("/more")
-def index():
+def more():
     return render_template("more.html")
 
 if __name__ == '__main__':
