@@ -1,17 +1,14 @@
-/*
-  CREATE TABLE flights2(
+
+  CREATE TABLE passengers(
     id SERIAL PRIMARY KEY,
-   origin VARCHAR NOT NULL,
-    destination VARCHAR NOT NULL,
-    duration INTEGER NOT NULL
+    name VARCHAR NOT NULL,
+    flight_id INTEGER REFERENCES flights2
 ); 
-*/
-INSERT INTO flights (origin, destination, duration) VALUES ('New York', 'London', 420);
-INSERT INTO flights (origin, destination, duration) VALUES ('New York', 'Boston', 200);
-INSERT INTO flights (origin, destination, duration) VALUES ('Tokyo', 'Dubai', 540);
-INSERT INTO flights (origin, destination, duration) VALUES ('Dubai', 'Doha', 80);
-INSERT INTO flights (origin, destination, duration) VALUES ('Dubai', 'Moscow', 240);
-INSERT INTO flights (origin, destination, duration) VALUES ('Dubai', 'Islamabad', 340);
-INSERT INTO flights (origin, destination, duration) VALUES ('Manila', 'Dubai', 560);
-INSERT INTO flights (origin, destination, duration) VALUES ('New York', 'Dubai', 520);
-INSERT INTO flights (origin, destination, duration) VALUES ('Dubai', 'London', 410);
+
+INSERT INTO passengers (name, flight_id) VALUES ('Alice', 1)
+INSERT INTO passengers (name, flight_id) VALUES ('Bob', 1)
+INSERT INTO passengers (name, flight_id) VALUES ('Maria', 2)
+INSERT INTO passengers (name, flight_id) VALUES ('Charlie', 2)
+INSERT INTO passengers (name, flight_id) VALUES ('Dave', 4)
+INSERT INTO passengers (name, flight_id) VALUES ('Jen', 6)
+INSERT INTO passengers (name, flight_id) VALUES ('Ali', 4)
