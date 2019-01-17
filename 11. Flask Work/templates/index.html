@@ -1,21 +1,23 @@
-<!DOCTYPE hmtl>
-    <head>
-        <title><h1>Main page of Names</h1></title>
-        <style>
-        .body {
-            text-align: center;
-        }
-        </style>
-    </head>
+{% extends "layout.html" %}
+{% block title %} 
+Flights
+{% endblock %}
+{% block body %}
+<h1>Book a flight !</h1>
+<form action="{{ url_for('book') }}" method="POST">
+    <div class="form-group">
+        <select class="form-group" name="flight_id">
+            {% for flight in flights %}
+            <option value="{{ flight.id }}">{{ flight.origin }} to {{ flight.destination }}</option>
+            {% endfor %}
+        </select>
+    </div>
 
-<body>
-    <ul>
-        {% for name in names %}
-         <li>  {{ name }} </li>
-         {% endfor %}
-    </ul>
+    <div class="form-group">
+        <input class="form-control" name="name" placeholder="Passenger Name">
+    </div>
 
-<a href="{{ url_for('more') }}">Go to more page..</a>
-    
-</body>
-</hmtl>
+    <div class="form-group">
+            <button class="btn btn-primary">Book Flight</button>
+        </div>
+</form>
