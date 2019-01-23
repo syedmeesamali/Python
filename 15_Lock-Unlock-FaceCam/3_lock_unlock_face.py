@@ -52,12 +52,14 @@ while True:
 
         cv2.rectangle(im, (x-20,y-20), (x+w+20,y+h+20), (0,255,0), 4)       
 
-        Id, confidence = recognizer.predict(gray[y:y+h,x:x+w])   # Recognize the face belongs to which ID
+        Id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
+        # Recognize the face belongs to which ID
 
         #if(Id == 1):    # Check the ID if exist 
          #   Id = "{0:.2f}%".format(round(100 - confidence, 2)) 
  
-        if(confidence>80):                 #confidence usually comes greater than 80 for strangers
+        if(confidence>80):
+            #confidence usually comes greater than 80 for strangers
             counter_wrong += 1
             print("Wrong")
             Id = "Unknown + {0:.2f}%".format(round(100 - confidence, 2)) 
@@ -65,8 +67,9 @@ while True:
             print("counter_wrong - " + str(counter_wrong))
             cv2.rectangle(im, (x-22,y-90), (x+w+22, y-22), (0,0,255), -1)
             cv2.putText(im, str(Id), (x,y-40), font, 1, (0,0,0), 2)
-        else:                              #confidence usually comes less than 80 for correct user(s)
-            Id = "Saksham + {0:.2f}%".format(round(100 - confidence, 2)) 
+        else:
+            #confidence usually comes less than 80 for correct user(s)
+            Id = "MEESAM + {0:.2f}%".format(round(100 - confidence, 2)) 
             print("Verified")
             print(confidence)
             counter_correct += 1
@@ -83,16 +86,17 @@ while True:
             ctypes.windll.user32.LockWorkStation()
             sys.exit()
 
-        if(counter_correct == 6):    #if counter = 6 then program will terminate as it has recognized correct user for 6 times. 
+        if(counter_correct == 6):
+            #if counter = 6 then program will terminate as it has recognized correct user for 6 times. 
             cam.release()
             cv2.destroyAllWindows()
             sys.exit()
 
     cv2.imshow('Webcam',im) 
 
-    if cv2.waitKey(10) & 0xFF == ord('*'):      # If '*' is pressed, terminate the  program
+    if cv2.waitKey(10) & 0xFF == ord('*'):
+        # If '*' is pressed, terminate the  program
         break
 
 cam.release()
-
 cv2.destroyAllWindows()

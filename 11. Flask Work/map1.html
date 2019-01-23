@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS=false; L_NO_TOUCH=false; L_DISABLE_3D=false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>#map_eae821683fc54640b7513fd05138a19d {
+        position: relative;
+        width: 100.0%;
+        height: 100.0%;
+        left: 0.0%;
+        top: 0.0%;
+        }
+    </style>
+</head>
+<body>    
+    
+    <div class="folium-map" id="map_eae821683fc54640b7513fd05138a19d" ></div>
+</body>
+<script>    
+    
+    
+        var bounds = null;
+    
+
+    var map_eae821683fc54640b7513fd05138a19d = L.map(
+        'map_eae821683fc54640b7513fd05138a19d', {
+        center: [37.296933, -121.9574983],
+        zoom: 8,
+        maxBounds: bounds,
+        layers: [],
+        worldCopyJump: false,
+        crs: L.CRS.EPSG3857,
+        zoomControl: true,
+        });
+
+    
+    
+    var tile_layer_c2260506a3724aa885829c50e7ea9ea3 = L.tileLayer(
+        'https://{s}.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+}).addTo(map_eae821683fc54640b7513fd05138a19d);
+    
+        var marker_2cc86bb9707041f0bbe0938e796f5277 = L.marker(
+            [37.296933, -121.9574983],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_eae821683fc54640b7513fd05138a19d);
+        
+    
+
+                var icon_d7ffd30ffb6f435e82c34302a6860d06 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'blue',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_2cc86bb9707041f0bbe0938e796f5277.setIcon(icon_d7ffd30ffb6f435e82c34302a6860d06);
+            
+    
+            var popup_93d8bc32f4344242830f80e6f68ad940 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_4f00cf0211cf4d6a95ae6203a0697169 = $(`<div id="html_4f00cf0211cf4d6a95ae6203a0697169" style="width: 100.0%; height: 100.0%;">Google HQ</div>`)[0];
+                popup_93d8bc32f4344242830f80e6f68ad940.setContent(html_4f00cf0211cf4d6a95ae6203a0697169);
+            
+
+            marker_2cc86bb9707041f0bbe0938e796f5277.bindPopup(popup_93d8bc32f4344242830f80e6f68ad940)
+            ;
+
+            
+        
+</script>
