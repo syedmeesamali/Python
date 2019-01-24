@@ -15,10 +15,3 @@ class Passenger(db.Model):
     name = db.Column(db.String, nullable = False)
     flight_id = db.Column(db.Integer, db.Foreignkey("flights.id"), nullable = False)
 
-
-def main():
-    db.create_all()
-
-if __name__ == "__main__":
-    with app.app_context():
-        main()
