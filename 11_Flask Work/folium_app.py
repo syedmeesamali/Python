@@ -2,7 +2,7 @@ import folium
 import pandas as pd
 
 #Load data of volcanoes in USA
-data = pd.read_csv('C:/Users/SYED/Desktop/Python/11. Flask Work/data/Volcanoes_USA.txt')
+data = pd.read_csv('C:/Users/SYED/Desktop/Python/11_Flask Work/data/Volcanoes.txt')
 lat = data['LAT']
 lon = data['LON']
 elevation = data['ELEV']
