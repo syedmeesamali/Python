@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import re
+from sklearn.tree import DecisionTreeClassifier
+
 
 #Training (891 entries) and Testing (417 entries)
 train_data = pd.read_csv('titanic/train.csv')
@@ -120,6 +122,18 @@ test_data = test_data.drop(drop_elements, axis = 1)
 print(train_data.head(10))
 
 
+#Future prediction
+#Train and test data
+X_train = train_data.drop("Survived", axis=1)
+Y_train = train_data["Survived"]
+X_test = test_data.drop("PassengerId", axis=1).copy()
+
+#Running the classifier
+decision_tree = DecisionTreeClassifier()
+decision_tree.fit(X_train, Y_train)
+Y_pred = decision_tree.predict(X_test)
+accuracy = round(decision_tree.score(X_train, Y_train)*100,2)
+print("Model Accuracy: ", accuracy)
 
 
 
