@@ -11,29 +11,29 @@ all_data = [train_data, test_data]
 passenger_id = test_data['PassengerId']
 
 #Feature # 1: Pclass
-print(train_data[['Pclass', 'Survived']].groupby(['Pclass'], as_index=False).mean())
+#print(train_data[['Pclass', 'Survived']].groupby(['Pclass'], as_index=False).mean())
 
 #Feature # 2: Sex
-print(train_data[['Sex', 'Survived']].groupby(['Sex'], as_index=False).mean())
+#print(train_data[['Sex', 'Survived']].groupby(['Sex'], as_index=False).mean())
 
 #Feature # 3: Family size
 for data in all_data:
     data['family_size'] = data['SibSp'] + data['Parch'] + 1
-print(train_data[['family_size', 'Survived']].groupby(['family_size'], as_index=False).mean())
+#print(train_data[['family_size', 'Survived']].groupby(['family_size'], as_index=False).mean())
 
 
 #Feature # 3.1: Is alone?
 for data in all_data:
     data['is_alone'] = 0
     data.loc[data['family_size'] == 1, 'is_alone'] = 1
-print(train_data[['is_alone', 'Survived']].groupby(['is_alone'], as_index=False).mean())
+#print(train_data[['is_alone', 'Survived']].groupby(['is_alone'], as_index=False).mean())
 
 
 #Feature # 4: Embarked?
 #Some data cleaning required as many datapoints are missing
 for data in all_data:
     data['Embarked'] = data['Embarked'].fillna('S')
-print(train_data[['Embarked', 'Survived']].groupby(['Embarked'], as_index=False).mean())
+#print(train_data[['Embarked', 'Survived']].groupby(['Embarked'], as_index=False).mean())
 
 
 #Feature # 5: Fare?
@@ -41,7 +41,7 @@ print(train_data[['Embarked', 'Survived']].groupby(['Embarked'], as_index=False)
 for data in all_data:
     data['Fare'] = data['Fare'].fillna(data['Fare'].median())
 train_data['category_fare'] = pd.qcut(train_data['Fare'], 4)
-print(train_data[['category_fare', 'Survived']].groupby(['category_fare'], as_index=False).mean())
+#print(train_data[['category_fare', 'Survived']].groupby(['category_fare'], as_index=False).mean())
 
 
 #Feature # 6: Age?
@@ -55,7 +55,7 @@ for data in all_data:
     data['Age'] = data['Age'].astype(int)
 
 train_data['category_age'] = pd.qcut(train_data['Age'], 5)
-print(train_data[['category_age', 'Survived']].groupby(['category_age'], as_index=False).mean())
+#print(train_data[['category_age', 'Survived']].groupby(['category_age'], as_index=False).mean())
 
 
 #Feature # 7: Name?
@@ -135,12 +135,11 @@ Y_pred = decision_tree.predict(X_test)
 accuracy = round(decision_tree.score(X_train, Y_train)*100,2)
 print("Model Accuracy: ", accuracy)
 
+#Create a CSV with results
+submission = pd.DataFrame({
+    "PassengerId": test_data["PassengerId"],
+    "Survived": Y_pred
+    })
 
-
-
-
-    
-
-
-
-
+submission.to_csv('submission.csv', index = False)
+                             
