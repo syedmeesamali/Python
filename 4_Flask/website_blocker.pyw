@@ -5,7 +5,7 @@ from datetime import datetime as dt
 #Path to host file, redirect to local server
 host_path = "C:\Windows\System32\drivers\etc\hosts"
 redirect = "127.0.0.1"
-website_list = ["https://www.netflix.com", "https://www.facebook.com"]
+website_list = ["www.netflix.com", "www.facebook.com", "facebook.com"]
 
 #Condition
 while True:
@@ -14,7 +14,7 @@ while True:
         print("Rihanna")
         time.sleep(5)
         #Open file and read the contents
-        file = open(host_path, "r+")
+        file = open(host_path, 'r+')
         content = file.read()
         for website in website_list:
             if website in content:
@@ -33,6 +33,6 @@ while True:
         for line in content:
             if not any(website in line for website in website_list):
                 file.write(line)
-            file.truncate()
-        time.sleep(5)
+        file.truncate()
+    time.sleep(5)
         
