@@ -1,7 +1,22 @@
 <html>
 <title>index</title>
-<head> <h1>Main index</h1></head>
+<head> <h1>Data Collection App</h1></head>
 <body>
-    Hello from new flask app.
+    <form class="container validate-form" action="{{url_for('success')}}" method="POST">
+            <div class="validate-input" data-validate="Name is required">
+					<input type="text" name="height" placeholder="Height (cm)">
+			</div>
+
+            <div class="validate-input" data-validate="Name is required">
+					<input type="text" name="weight" placeholder="Weight (Kg)">
+			</div>
+
+            <div class="validate-input" data-validate="Name is required">
+					<input type="text" name="sex" placeholder="Sex (m/f)">
+			</div>
+
+            <button type="submit"><span>Submit Data</span></button>
+    </form>
+    Please enter your data in the form fields above and then press the submit button. Thanks !
 </body>
 </html>
