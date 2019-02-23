@@ -33,7 +33,14 @@ def index():
 #Define 2nd route and content
 @app.route("/success", methods = ['POST'])
 def success():
-    return render_template("success.html")
+    if(request.method == 'POST'):
+        height_ = request.form["height"]
+        weight_ = request.form["weight"]
+        sex_ = request.form["sex"]
+        data = Data(height_, weight_, sex_)
+        db.session.add(data)
+        db.session.commit()
+        return render_template("success.html")
 
 #Running and controlling the script
 if (__name__ == "__main__"):
