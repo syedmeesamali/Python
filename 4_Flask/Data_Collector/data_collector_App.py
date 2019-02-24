@@ -1,13 +1,13 @@
-#Import dependencies
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-#from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 
-#Create instance of flask app
+#Create instance of Flask App
 app = Flask(__name__)
 
 #Connect to the Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:admin@localhost:5432'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:postgres1@localhost/DataCollector'
+
 db = SQLAlchemy(app)
 
 
