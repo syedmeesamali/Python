@@ -3,14 +3,15 @@
 <head> <h1>Data Collection App</h1></head>
 <body>
     <form class="container validate-form" action="{{url_for('success')}}" method="POST">
+            <label for="height">Enter your height (cm):</label>
             <div class="validate-input" data-validate="Name is required">
 					<input type="text" name="height" placeholder="Height (cm)">
 			</div>
-
+            <label for="weight">Enter your weight (Kg):</label>
             <div class="validate-input" data-validate="Name is required">
 					<input type="text" name="weight" placeholder="Weight (Kg)">
 			</div>
-
+            <label for="sex">Your sex (male / female):</label>
             <div class="validate-input" data-validate="Name is required">
 					<input type="text" name="sex" placeholder="Sex (m/f)">
 			</div>
