@@ -10,13 +10,4 @@ Data Saved Already!
     <li>Sex: {{ flight.duration }} minutes</li>
 </ul>>
 
-<h2> Passengers !</h2>
-<ul>
-    {% for passenger in passengers %}
-
-    <li>{{ passenger.name }}</li>
-    {% else %}
-    <li>No Passengers for this flight !</li>
-    {% endfor %}
-</ul>>
 {% endblock %}
