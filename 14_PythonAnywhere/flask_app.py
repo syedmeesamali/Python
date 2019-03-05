@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask import render_template
 
 app = Flask(__name__)
 app.config['SQLALCHEMRY_DATABASE_URI'] = 'postgres://postgres:admin@localhost:5432'
@@ -19,7 +20,12 @@ class User(db.Model):
 
 @app.route("/")
 def index():
+    return render_template("add_user.html")
+
+@app.route("/post_user", methods = ['POST'])
+def post_user():
     return "<h1 style='color: red'>Hello, Ali Shah</h1>"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
