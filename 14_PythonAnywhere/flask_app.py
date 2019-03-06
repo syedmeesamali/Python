@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask import render_template
+from flask import render_template, url_for, request, redirect
 
 app = Flask(__name__)
-app.config['SQLALCHEMRY_DATABASE_URI'] = 'postgres://postgres:admin@localhost:5432'
+app.config['SQLALCHEMRY_DATABASE_URI'] = 'postgres://postgres:admin@localhost/data1'
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -16,16 +16,21 @@ class User(db.Model):
         self.email = email
 
     def __repr__(self):
-        return "<{0} id: {1}>".format(self.__class__.__name__, self.id)
+        return '<User %r>' % self.username
 
 @app.route("/")
 def index():
     return render_template("add_user.html")
 
-@app.route("/post_user", methods = ['POST'])
+@app.route("/post_user", methods=['POST'])
 def post_user():
-    return "<h1 style='color: red'>Hello, Ali Shah</h1>"
+    user = User(request.form['username'], request.form['email'])
+    db.session.add(user)
+    db.session.commit()
+    return redirect(url_for('index'))
+
 
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(debug=True)
