@@ -37,7 +37,6 @@ def success():
         sex_ = request.form["sex"]
         data = Data(height_, weight_, sex_)
         db.session.add(data)
-        db.session.commit()
         return render_template("success.html")
 
 #Running and controlling the script
