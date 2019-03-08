@@ -13,6 +13,13 @@
         <input id="email" name="email" type="text" />
         <input type="submit" />
     </form>
+
+    {% for user in myuser %}
+    <li>
+        {{ user.username }}
+    </li>
+
+    {% endfor %}
 </bod>
 
 </html>
