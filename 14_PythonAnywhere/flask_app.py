@@ -21,7 +21,8 @@ class Movie(db.Model):
 
 @app.route('/')
 def index():
-    return render_template("add_user.html")
+    myUser = Movie.query.all()
+    return render_template("add_user.html", myUser = myUser)
 
 @app.route('/post_user', methods=['POST'])
 def post_user():
