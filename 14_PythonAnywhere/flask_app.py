@@ -25,7 +25,7 @@ def index():
     return render_template("add_user.html", myUser = myUser)
 
 @app.route('/profile/<username>')
-def index():
+def profile(username):
     user = Movie.query.filter_by(username = username).first()
     return render_template("profile.html", user = user)
 
