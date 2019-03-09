@@ -30,7 +30,7 @@ def post_user():
         user1 = Movie(request.form['username'], request.form['email'])
         db.session.add(user1)
         db.session.commit()
-        return redirect(url_for('index'))
+        return render_template("success.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
