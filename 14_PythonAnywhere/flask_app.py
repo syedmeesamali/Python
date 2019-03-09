@@ -24,6 +24,11 @@ def index():
     myUser = Movie.query.all()
     return render_template("add_user.html", myUser = myUser)
 
+@app.route('/profile/<username>')
+def index():
+    user = Movie.query.filter_by(username = username).first()
+    return render_template("profile.html", user = user)
+
 @app.route('/post_user', methods=['POST'])
 def post_user():
     if(request.method == 'POST'):
