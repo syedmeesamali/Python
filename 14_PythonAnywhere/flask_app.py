@@ -1,23 +1,31 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import render_template, request, redirect, url_for
+from flask_security import security, SQLAlchemyUserDatastore, Usermixin, Rolemixin, login_required
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:admin@localhost/movie'
 db = SQLAlchemy(app)
 
-class Movie(db.Model):
-    __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(80))
-    email = db.Column(db.String(120))
+# class Movie(db.Model):
+#     __tablename__ = "users"
+#     id = db.Column(db.Integer, primary_key = True)
+#     username = db.Column(db.String(80))
+#     email = db.Column(db.String(120))
 
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
+#     def __init__(self, username, email):
+#         self.username = username
+#         self.email = email
 
-    def __repr__(self):
-        return '<Movie %r>' % self.username
+#     def __repr__(self):
+#         return '<Movie %r>' % self.username
+
+#Define new models for our flask-security database
+roles_users = db.Table('roles_users', db.Column('user_id', db.Integer(), db.ForeignKey('user.id')), 
+                db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
+
+class Role(db.Model, Rolemixin):
+    
 
 @app.route('/')
 def index():
