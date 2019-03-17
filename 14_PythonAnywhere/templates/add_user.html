@@ -24,14 +24,7 @@
         <input id="email" name="email" type="text" />
         <input type="submit" />
     </form>
-    <p> Below is list of previously entered data already stored in Database !
-    <ol>
-    {% for user in myUser %}
-    <li>
-       Name =  {{ user.username }} , Email address:  {{ user.email }}
-    </li>
-    {% endfor %}
-    </ol>
+    
 </bod>
 
 </html>
