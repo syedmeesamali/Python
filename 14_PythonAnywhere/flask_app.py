@@ -40,8 +40,6 @@ def index():
 @app.route('/post_user', methods=['POST'])
 def post_user():
     if(request.method == 'POST'):
-        user1 = User(request.form['email'], request.form['password'])
-        db.session.add(user1)
         db.session.commit()
         return render_template("success.html")
 
