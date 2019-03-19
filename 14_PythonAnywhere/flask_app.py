@@ -29,13 +29,23 @@ class User(db.Model, UserMixin):
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
 
+
 # Setup Flask-Security
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
-  
+
+# Create a user to test with
+@app.before_first_request
+def create_user():
+    db.create_all()
+    user_datastore.create_user(email='matt@nobien.net', password='password')
+    db.session.commit()
+
+# Views
 @app.route('/')
+@login_required
 def index():
-    return render_template("add_user.html")
+    return render_template('add_user.html')
 
 @app.route('/post_user', methods=['POST'])
 def post_user():
