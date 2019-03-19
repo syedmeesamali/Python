@@ -5,7 +5,7 @@ from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMix
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:admin@localhost/movie'
-app.config['SECRET-KEY'] = 'super-secret'
+app.config['SECRET-KEY'] = 'somesecretkey'
 app.config['SECURITY_REGISTERABLE'] = True
 app.debug = True
 db = SQLAlchemy(app)
@@ -33,13 +33,6 @@ class User(db.Model, UserMixin):
 # Setup Flask-Security
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
-
-# Create a user to test with
-@app.before_first_request
-def create_user():
-    db.create_all()
-    user_datastore.create_user(email='matt@nobien.net', password='password')
-    db.session.commit()
 
 # Views
 @app.route('/')
