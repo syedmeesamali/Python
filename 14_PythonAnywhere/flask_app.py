@@ -44,9 +44,10 @@ def index():
 @app.route('/post_user', methods=['POST'])
 def post_user():
     if(request.method == 'POST'):
+        user = User(email = request.form['email'], password = request.form['password'])
+        db.session.add(user)
         db.session.commit()
         return render_template("success.html")
 
 if __name__ == '__main__':
-    app.secret_key = 'super secret key'
     app.run()
