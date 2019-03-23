@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 from flask_security import Security, SQLAlchemyUserDatastore, \
     UserMixin, RoleMixin, login_required
 
@@ -8,6 +9,7 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:admin@localhost/movie'
+app.config['SECURITY_PASSWORD_SALT'] = 'secret'
 # Create database connection object
 db = SQLAlchemy(app)
 
@@ -34,18 +36,19 @@ class User(db.Model, UserMixin):
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 
-# Create a user to test with
-@app.before_first_request
-def create_user():
-    db.create_all()
-    user_datastore.create_user(email='matt@nobien.net', password='password')
-    db.session.commit()
-
 # Views
 @app.route('/')
 @login_required
 def home():
     return render_template('add_user.html')
+
+@app.route('/post_user', methods=['POST'])
+def post_user():
+    if(request.method == 'POST'):
+        user1 = Role(name = request.form['name'], description = request.form['desc'])
+        db.session.add(user1)
+        db.session.commit()
+        return render_template("success.html")
 
 if __name__ == '__main__':
     app.run()
