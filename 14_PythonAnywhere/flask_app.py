@@ -1,18 +1,17 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask import render_template, request, redirect, url_for
-from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin, login_required
+from flask_security import Security, SQLAlchemyUserDatastore, \
+    UserMixin, RoleMixin, login_required
 
+# Create app
 app = Flask(__name__)
+app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'super-secret'
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:admin@localhost/movie'
-app.config['SECURITY_REGISTERABLE'] = True
-app.secret_key = 'tfdghsf3wquhivfcdsz5.5432jkicdsahuihuj7564jinjnf'
-app.config['SECURITY_PASSWORD_HASH'] = 'pbkdf2_sha512'
-app.config['SECURITY_PASSWORD_SALT'] = '1b3kxc8s9fdsa9431vbgvhui43212ijkdrdwui'
-app.debug = True
+# Create database connection object
 db = SQLAlchemy(app)
 
-#Define roles and users as per the requirements in flask-security
+# Define models
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
         db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
@@ -35,19 +34,18 @@ class User(db.Model, UserMixin):
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 
+# Create a user to test with
+@app.before_first_request
+def create_user():
+    db.create_all()
+    user_datastore.create_user(email='matt@nobien.net', password='password')
+    db.session.commit()
+
 # Views
 @app.route('/')
 @login_required
-def index():
+def home():
     return render_template('add_user.html')
-
-@app.route('/post_user', methods=['POST'])
-def post_user():
-    if(request.method == 'POST'):
-        user = User(email = request.form['email'], password = request.form['password'])
-        db.session.add(user)
-        db.session.commit()
-        return render_template("success.html")
 
 if __name__ == '__main__':
     app.run()
