@@ -1,3 +1,3 @@
 import smtplib
-smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+smtpObj = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 print(type(smtpObj))
