@@ -42,6 +42,11 @@ security = Security(app, user_datastore)
 def home():
     return render_template('add_user.html')
 
+@app.route('/profile/<name>')
+def profile(name):
+    user = Role.query.filter_by(name = name).first()
+    return render_template("profile.html", user = user)
+
 @app.route('/post_user', methods=['POST'])
 def post_user():
     if(request.method == 'POST'):
