@@ -14,7 +14,6 @@ def bop(bot, update):
     chat_id = update.message.chat_id
     bot.send_photo(chat_id=chat_id, photo=url)
 
-
 def main():
     updater = Updater('my_token')
     dp = updater.dispatcher
