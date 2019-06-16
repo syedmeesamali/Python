@@ -6,7 +6,7 @@ for x in range(100):
     for y in range(50):
         im.putpixel((x,y),(210,210,210))
 
-for PIL import ImageColor
+from PIL import ImageColor
 for x in range(100):
     for y in range(50,100):
         im.putpixel((x,y), ImageColor.getcolor('darkgrey','RGBA'))
