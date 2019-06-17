@@ -6,5 +6,14 @@ Fit_Size = 300
 logo_Name = 'catlogo.png'
 logoIm = Image.open(logo_Name)
 
-logo_width, logo_height = logoIm.size 
+logo_width, logo_height = logoIm.size
+
+os.makedirs('withlogo', exist_ok= True)
+#Loop over the files in the working directory
+
+for filename in os.listdir('.'):
+    if not (filename.endswith('.png')) or (filename.endswith('.jpg')) or (filename ==logo_Name):
+        continue
+    im = Image.open(filename)
+    width, height = im.size
 
