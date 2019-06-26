@@ -3,7 +3,7 @@ import os
 from PIL import Image
 
 Fit_Size = 300
-logo_Name = 'catlogo.png'
+logo_Name = 'cropped.png'
 logoIm = Image.open(logo_Name)
 
 logo_width, logo_height = logoIm.size
