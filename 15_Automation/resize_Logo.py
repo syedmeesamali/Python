@@ -17,3 +17,13 @@ for filename in os.listdir('.'):
     im = Image.open(filename)
     width, height = im.size
 
+    if width > Fit_Size and height > Fit_Size:
+        if width > height:
+            height = int((Fit_Size / width) * height)
+            width = Fit_Size
+        else:
+            width = int((Fit_Size / height) * width)
+            height = Fit_Size
+        print("Resizing %s..." %(filename))
+        im = im.resize((width, height))
+        
