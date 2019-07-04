@@ -23,3 +23,23 @@ def __init__(self, df, lookback_window_size = 50, commission = 0.00075, initial_
 
 #Observes the OHCLV values, net worth and trade history
     self.observation_pace = spaces.Box(low = 0, high = 1, shape = (10, lookback_window_size+1), dtype = np.float16)
+
+def reset(self):
+    self.balance = self.initial_balance
+    self.net_worth = self.initial_balance
+    self.btc_held = 0
+
+    self._reset_session()
+
+    self.account_history = np.repeat([
+        [self.net_worth],
+        [0],
+        [0],
+        [0],
+        [0]
+    ], self.lookback_window_size + 1, axis = 1)
+    self.trades = []
+
+    return self._next_observation()
+    
+
