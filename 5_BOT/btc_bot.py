@@ -48,4 +48,20 @@ def _reset_session(self):
         self.steps_left = len(self.df) - self.lookback_window_size - 1
         self.frame_start = self.lookback_window_size
     else:
-        self.steps_left = 
+        self.steps_left = np.random.randint(1, MAX_TRADING_SESSIONS)
+        self.frame_start = np.random.randint(self.lookback_window_size, len(self.df) - self.steps_left)
+        self.active_df = self.df[self.frame_start - self.lookback_window_size: self.frame_start + self.steps_left] 
+
+def _next_observation(self):
+    end = self.current_step + self.lookback_window_size + 1
+    obs = np.array([
+        self.active_df['Open'].values[self.current_step:end], 
+        self.active_df['High'].values[self.current_step:end], 
+        self.active_df['Low'].values[self.current_step:end], 
+        self.active_df['Close'].values[self.current_step:end], 
+        self.active_df['Volume_(BTC)'].values[self.current_step:end], 
+    ])
+
+    scaled_history = self.scaler.fit_transform(self.account_history)
+    obs = np.append(obs, scaled_history[:, -(self.lookback_window_size + 1):], axis = 0)
+    return obs
