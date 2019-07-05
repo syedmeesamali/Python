@@ -4,6 +4,7 @@ import numpy as np
 from gym import spaces
 from sklearn import preprocessing
 
+MAX_TRADING_SESSIONS = 100000  #Almost 2 months
 
 class BitcoinTradingEnv(gym.Env):
     #Bitcoin trading environment for openAI "gym"
@@ -30,7 +31,6 @@ def reset(self):
     self.btc_held = 0
 
     self._reset_session()
-
     self.account_history = np.repeat([
         [self.net_worth],
         [0],
@@ -39,7 +39,13 @@ def reset(self):
         [0]
     ], self.lookback_window_size + 1, axis = 1)
     self.trades = []
-
     return self._next_observation()
     
+def _reset_session(self):
+    self.current_step = 0
 
+    if self.serial:
+        self.steps_left = len(self.df) - self.lookback_window_size - 1
+        self.frame_start = self.lookback_window_size
+    else:
+        self.steps_left = 
