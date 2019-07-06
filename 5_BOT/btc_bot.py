@@ -65,3 +65,10 @@ def _next_observation(self):
     scaled_history = self.scaler.fit_transform(self.account_history)
     obs = np.append(obs, scaled_history[:, -(self.lookback_window_size + 1):], axis = 0)
     return obs
+
+def step(self, action):
+    current_price = self._get_current_price() + 0.01
+    self._take_action(action, current_price)
+    self.steps_left -= 1
+    self.current_step += 1
+    
