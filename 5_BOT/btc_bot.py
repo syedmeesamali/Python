@@ -71,4 +71,26 @@ def step(self, action):
     self._take_action(action, current_price)
     self.steps_left -= 1
     self.current_step += 1
-    
+
+    if self.steps_left == 0:
+        self.balance += self.btc_held * current_price
+        self.btc_held = 0
+        self._reset_session()
+
+    obs = self._next_observation()
+    reward = self.net_worth
+    done = self.net_worth <= 0
+    return obs, reward, done, {}
+
+
+def take_action(self, action, current_price):
+    action_type = action[0]
+    amount = action[1] / 10
+    btc_bought = 0
+    btc_sold = 0
+    cost = 0
+    sales = 0
+
+    if action_type < 1:
+        btc_bought = self.balance / current_price * amount
+        cost = btc_bought * current_price * (1 + self.commission)
