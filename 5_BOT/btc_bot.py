@@ -66,6 +66,9 @@ def _next_observation(self):
     obs = np.append(obs, scaled_history[:, -(self.lookback_window_size + 1):], axis = 0)
     return obs
 
+#Whenever self.steps_left == 0 for our current trading session, 
+#we will sell any BTC we are holding and call _reset_session()
+
 def step(self, action):
     current_price = self._get_current_price() + 0.01
     self._take_action(action, current_price)
@@ -82,6 +85,8 @@ def step(self, action):
     done = self.net_worth <= 0
     return obs, reward, done, {}
 
+#Taking an action is as simple as getting the current_price, determining the specified action, 
+#and either buying or selling the specified amount of BTC. 
 
 def take_action(self, action, current_price):
     action_type = action[0]
@@ -94,3 +99,26 @@ def take_action(self, action, current_price):
     if action_type < 1:
         btc_bought = self.balance / current_price * amount
         cost = btc_bought * current_price * (1 + self.commission)
+        self.btc_held += btc_bought
+        self.balance -= cost
+    elif action_type < 2:
+        btc_sold = self.btc_held * amount
+        sales = btc_sold * current_price * (1 - self.commission)
+        self.btc_held -= btc_sold
+        self.balance += sales
+
+    if btc_sold > 0 or btc_bought > 0:
+        self.trades.append({
+            'step': self.frame_start + self.current_step,
+            'amount': btc_sold if btc_sold > 0 else btc_bought, 
+            'total': sales if btc_sold else cost,
+            'type': "sell" if btc_sold > 0 else "buy"
+        })
+
+        self.net_worth = self.balance + self.btc_held * current_price
+        self.account_history = np.append(self.account_history, [
+        [net_worth],
+        [btc_bought],
+        [cost],
+        [btc_sold],
+        [sales]], axis = 1)
