@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 from gym import spaces
 from sklearn import preprocessing
+from datetime import datetime
+
 
 MAX_TRADING_SESSIONS = 100000  #Almost 2 months
 
@@ -122,3 +124,7 @@ def take_action(self, action, current_price):
         [cost],
         [btc_sold],
         [sales]], axis = 1)
+
+#Watching out BOTs (agent) trade
+date_labels = np.array([datetime.utcfromtimestamp(x).strftime('%Y-%m-%d %H:%M') 
+for x in self.df['Timestamp'].values(step_range)])
