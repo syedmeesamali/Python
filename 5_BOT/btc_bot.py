@@ -128,3 +128,13 @@ def take_action(self, action, current_price):
 #Watching out BOTs (agent) trade
 date_labels = np.array([datetime.utcfromtimestamp(x).strftime('%Y-%m-%d %H:%M') 
 for x in self.df['Timestamp'].values(step_range)])
+
+def render(self, mode='human', **kwargs):
+    if mode == 'human':
+        if self.viewer == None:
+            self.viewer = BitcoinTradingGraph(self.df, kwargs.get('title', None))
+        
+        self.viewer.render(
+            self.frame_start + self.current_step, self.net_worth, self.trades, 
+            windows_size = self.lookback_window_size)
+        
