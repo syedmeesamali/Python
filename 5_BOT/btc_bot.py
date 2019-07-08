@@ -14,7 +14,7 @@ class BitcoinTradingEnv(gym.Env):
     scaler = preprocessing.MinMaxScaler()
     viewer = None
 
-def __init__(self, df, lookback_window_size = 50, commission = 0.00075, initial_balance = 10000, serial = False)
+def __init__(self, df, lookback_window_size = 50, commission = 0.00075, initial_balance = 10000, serial = False):
     self.df = df.dropna().reset_index()
     self.lookback_window_size = lookback_window_size
     self.initial_balance = initial_balance
@@ -126,9 +126,6 @@ def take_action(self, action, current_price):
         [sales]], axis = 1)
 
 #Watching out BOTs (agent) trade
-date_labels = np.array([datetime.utcfromtimestamp(x).strftime('%Y-%m-%d %H:%M') 
-for x in self.df['Timestamp'].values(step_range)])
-
 def render(self, mode='human', **kwargs):
     if mode == 'human':
         if self.viewer == None:
