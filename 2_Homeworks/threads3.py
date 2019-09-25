@@ -20,3 +20,11 @@ for i in range(threads):
     print("Thread #: ", str(i))
     x = os.popen('whoami').read()
     print("User running: ", str(x))
+    locks[i] = os.fork()
+    if locks[i] == 0:
+        print()
+        exit()
+    pass
+    finished = os.wait(0, 0)
+    print("ID of new child is: ", str(finished[0]))
+    
