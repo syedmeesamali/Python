@@ -1,8 +1,3 @@
-import os
 from PIL import Image
-loveImg = Image.open('heart.jpg')
-print(loveImg.size)
-print(loveImg.filename)
-
-croppedIm = loveImg.crop((335, 345,565,560))
-croppedIm.save('cropped.png')
+catIm = Image.open('cat1.png') #Open the cat image
+catIm.transpose(Image.FLIP_TOP_BOTTOM).save('vertical_flip.png')
