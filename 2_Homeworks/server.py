@@ -1,7 +1,7 @@
 import socket
 
 ssFT = socket.socket()
-ssFT.connect(('127.0.0.1', 5000))
+ssFT.connect(('127.0.0.1', 3306))
 ssFT.listen(1)
 print("Listening......")
 while True:
