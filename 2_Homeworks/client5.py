@@ -8,9 +8,9 @@ if len(sys.argv) > 1:
     parts = host.split(".")
     if len(parts) != 4:
         print("Invalid IP address")
-    if(int(sys.argv[2])) <= 5000:
+    if(int(sys.argv[2])) < 5000:
         print("Invalid port number")
-    sys.exit(0)
+        sys.exit(0)
     port = int(sys.argv[2])
 
 print("Connected")
