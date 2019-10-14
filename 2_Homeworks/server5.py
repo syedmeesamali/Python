@@ -1,20 +1,20 @@
-import socket, os, sys
+import socket, sys
 
 if len(sys.argv) != 2:
     sys.exit(0)
 if len(sys.argv) > 1:
     port = int(sys.argv[1])
     
-host = '127.0.0.1'
-
 socket = socket.socket()
-socket.bind((host, port))
+socket.bind(('', port))
 
 socket.listen(1)
-print("Listening...")
+print("Listening on port # ", str(port))
+
+#---------Run main server while all okay--------
 while (1):
     conn, addr = socket.accept()
-    print('New client connected ..')
+    print('New client connected ...')
     reqCommand = conn.recv(1024).decode('utf_8')
     print(reqCommand)
     if (reqCommand == 'x'):
@@ -40,6 +40,8 @@ while (1):
                 for data in file_to_send:
                     conn.sendall(data)
             print('Sent by Server Successfully')
+        else:
+            print("Invalid command")
     conn.close()
 
 socket.close()
