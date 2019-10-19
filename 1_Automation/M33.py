@@ -9,7 +9,7 @@ clickCount = 0
 for i in range(37):
     try:
         im=pyautogui.screenshot(region=(400,5,950,700))
-        im.save('R_M33_' + str(i) + '.png')
+        im.save('_M33_' + str(i) + '.png')
         time.sleep(0.8)
         pyautogui.click(1210,715)  #Click elev button
         time.sleep(0.5)
@@ -17,7 +17,7 @@ for i in range(37):
         time.sleep(0.4)
     except IOError:
         im=pyautogui.screenshot(region=(400,5,950,700))
-        im.save('R_M33_' + str(i) + '.png')
+        im.save('_M33_' + str(i) + '.png')
         time.sleep(0.8)
         pyautogui.click(1210,715)  #Click elev button
         time.sleep(0.5)
