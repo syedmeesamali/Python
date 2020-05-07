@@ -1,23 +1,14 @@
 def Sum1(a,b,c):
     if (a+b+c) == 19:
-        print("a = ", str(a))
-        print("b = ", str(b))
-        print("c = ", str(c))
-        return True
+        return(a+b+c)
 
 def Sum2(a,b,c):
     if (a+b-c) == 10:
-        print("a = ", str(a))
-        print("b = ", str(b))
-        print("c = ", str(c))
-        return True
+        return (a+b-c)
 
 def Sum3(a,b,c):
     if (a-b+c) == 10:
-        print("a = ", str(a))
-        print("b = ", str(b))
-        print("c = ", str(c))
-        return True
+        return (a-b+c)
 
 for i in range(1,100):
     for j in range(1,100):
