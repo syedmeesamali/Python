@@ -1,17 +1,10 @@
-import os
-from PIL import Image
+#this program will crop an image into n number of pieces with x and y dims of each 
+#piece and save in the same parent folder
+import cv2
+#install python library open-cv by using 'pip install opencv-python
 
-def crop(input, height, width):
-    im = Image.open(input)
-    imgWidth, imgHeight = im.size
-    for i in range(0, imgHeight, height):
-        for j in range(0, imgWidth, width):
-            box = (j, i, j+width, i+height)
-            a = im.crop(box)
-            try:
-                o = a.crop(area)
-                o.save(os.path.join("PNG", "%s", "Letter-%s.png"))
-            except:
-                pass
+img = cv2.imread('alphabets.jpg')
+for r in range(0, img.shape[0], 214):
+    for c in range(0, img.shape[1], 214):
+        cv2.imwrite(f"img{r}_{c}.png", img[r:r+214, c:c+214, :])
 
-crop('alphabets.jpg', 200,200)
