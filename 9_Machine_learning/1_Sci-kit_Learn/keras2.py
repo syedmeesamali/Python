@@ -29,7 +29,9 @@ y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
 num_classes = y_test.shape[1]       #Number of categories
+print(num_classes)
 
+#First main convolutional network model
 def convolutional_model():
     #Create the model
     model = Sequential()
@@ -41,7 +43,7 @@ def convolutional_model():
     model.add(Dense(num_classes, activation = 'softmax'))
 
     #compile the model
-    model.compile(optimizer = 'adam', loss = 'categorical_crossentroy', metrics = ['accuracy'])
+    model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
     return model
 
 #Let's build the model
@@ -49,4 +51,7 @@ model = convolutional_model()
 
 #Fit the model
 model.fit(X_train, y_train, validation_data = (X_test, y_test), epochs = 10, batch_size = 200, verbose = 2)
+
+#Evaluate the model
+scores = model.evaluate(X_test, y_test, verbose = 0)
 print("Accuracy: {} \n Error: {}".format(scores[1], 100-scores[1]*100))
