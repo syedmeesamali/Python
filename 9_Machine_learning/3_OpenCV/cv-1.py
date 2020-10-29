@@ -10,6 +10,9 @@ ap.add_argument("-c", "--confidence", type = float, default = 0.5,
         help = "minimum probability to filter weak detections")
 args = vars(ap.parse_args())
 
+#Example usage: python cv-1.py 
+# -i "./rsrc/rooster.jpg" -p "./rsrc/deploy.prototxt.txt" -m "./rsrc/res10_300x300_ssd_iter_140000.caffemodel"
+
 print("[INFO] loading model ...")
 net = cv2.dnn.readNetFromCaffe(args["prototext"], args["model"])
 
