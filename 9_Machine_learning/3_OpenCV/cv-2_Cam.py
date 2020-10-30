@@ -13,3 +13,16 @@ ap.add_argument("-c", "--confidence", type=float, default=0.5, help="minimum pro
 args = vars(ap.parse_args())
 
 #Load serialized model from disk
+print("[INFO] Loading model ...")
+net = cv2.dnn.readNetFromCaffe(args["prototext"], args["model"])
+
+#Initialize vidoe stream and let camera setup warmup
+print("[INFO] Starting video stream ...")
+vs = VideoStream(src = 0).start()
+time.sleep(2.0)
+
+#Loop over frames from the video stream
+while True:
+    frame = vs.read()
+    frame = imutils.resize(frame, width = 400)
+    

@@ -1,5 +1,4 @@
 import pyttsx3
-speaker = pyttsx3.init("dummy")
-
-speaker.say("Look how i am doing now")
-speaker.runAndWait()
+engine = pyttsx3.init()
+engine.say("I will speak this text")
+engine.runAndWait()
