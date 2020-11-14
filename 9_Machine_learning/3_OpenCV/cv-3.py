@@ -3,7 +3,7 @@ import cv2 as cv
 
 img = cv.imread('rsrc/boss.JPG')
 
-def rescaleFrame(frame, scale = 0.75):
+def rescaleFrame(frame, scale = 0.25):
     width = int(frame.shape[1] * scale)
     height = int(frame.shape[0] * scale)
     dimensions = (width, height)
