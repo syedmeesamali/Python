@@ -4,6 +4,7 @@ from keras.utils import np_utils
 
 data_path = 'dataset'
 categories = os.listdir(data_path)
+print(categories)
 labels = [i for i in range(len(categories))]
 label_dict = dict(zip(categories, labels))
 
@@ -20,7 +21,7 @@ for category in categories:
 
         try:
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            resized = cv2.resize(gray, (100, 100))dataset
+            resized = cv2.resize(gray, (100, 100))
             data.append(resized)
             target.append(label_dict[category])
 
@@ -31,6 +32,9 @@ data = np.array(data) / 255.0
 data = np.reshape(data, (data.shape[0], 100, 100, 1))
 target = np.array(target)
 
-new_target = np_utils.to_categorical(target)
+try:
+    new_target = np_utils.to_categorical(target)
+except:
+    pass
 np.save('data', data)
 np.save('target', new_target)
