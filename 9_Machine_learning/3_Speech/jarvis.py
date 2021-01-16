@@ -2,23 +2,17 @@ import pyttsx3                          #pip install pyttsx3
 import datetime
 import speech_recognition as sr         #pip install speechRecognition
 
-
-
 engine = pyttsx3.init()         #Main speech engine
-
 
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
 #speak("Hello ali how are you?")
-
 def time_():
     Time = datetime.datetime.now().strftime("%H:%M:%S")     #24-hour time format
     speak("The current time is: ")
     speak(Time)
-
-#time_()
 
 def date_():
     year = datetime.datetime.now().year
@@ -45,7 +39,9 @@ def greetme():
         speak("Good night sir")
     speak("Nice robot at your service. What can i do for you today?")
 
-greetme()
+
+#Run the greetme function
+#greetme()
 
 def TakeCommand():
     r = sr.Recognizer()
@@ -61,3 +57,7 @@ def TakeCommand():
     except Exception as e:
         print(e)
         print("Say that again please.....")
+        return "None"
+    return query
+
+TakeCommand()
