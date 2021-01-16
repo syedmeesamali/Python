@@ -24,9 +24,9 @@ def date_():
     speak("Day" + str(day))
 
 def greetme():
-    speak("Hello Sir Ali how are you doing?")
-    time_()
-    date_()
+    speak("Hello Sir how are you doing?")
+    #time_()
+    #date_()
     hour = datetime.datetime.now().hour
 
     if hour >= 6 and hour < 12:
@@ -36,8 +36,8 @@ def greetme():
     elif hour >= 18 and hour < 24:
         speak("Good evening sir")
     else:
-        speak("Good night sir")
-    speak("Nice robot at your service. What can i do for you today?")
+        speak("Good night to you. ")
+    speak("I am a female robot at your service. What can i do for you today?")
 
 
 #Run the greetme function
@@ -56,14 +56,21 @@ def TakeCommand():
         print("Recognizing....")
         query = r.recognize_google(audio, language='en-US')
         print(query)
-        if query == "hello":
-            greetme()
-        else:
-            pass
+        
     except Exception as e:
         print(e)
         print("Say that again please.....")
         return "None"
     return query
 
-TakeCommand()
+if __name__ == "__main__":
+    greetme()
+    while True:
+        query = TakeCommand().lower()       #Store all commands in lower letters
+        if 'time' in query:
+            time_()
+        elif 'date' in query:
+            date_()
+        elif 'bye' in query:
+            speak("Bye sir. Take care. ")
+            break
