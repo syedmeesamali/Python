@@ -28,3 +28,26 @@ class NeuralNetwork:
 
         self.h1 = Neuron(weights, bias)         #First neuron of hidden layer
         self.h2 = Neuron(weights, bias)         #Second neuron of hidden layer
+        self.o1 = Neuron(weights, bias)         #This is the output neuron
+    
+    def feedforward(self, x):
+        out_h1 = self.h1.feedforward(x)
+        out_h2 = self.h2.feedforward(x)
+
+        #Inputs to o1 will be the outputs from h1 and h2
+        out_o1 = self.o1.feedforward(np.array([out_h1, out_h2]))
+        return out_o1
+
+#Mean square error function for training
+def mse_loss(y_true, y_pred):
+    #y_true and y_pred are numpy arrays of same length
+    return ((y_true - y_pred)**2).mean()                #Mean square error
+
+y_true = np.array([1, 0, 0, 1])             #1 is male and 0 is female (refer photo in same folder for table)
+y_pred = np.array([0, 0, 0, 0])             #Assuming all as female
+
+print(mse_loss(y_true, y_pred))
+
+# network = NeuralNetwork()
+# x = np.array([2, 3])
+# print(network.feedforward(x))
