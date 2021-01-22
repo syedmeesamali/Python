@@ -19,30 +19,31 @@ class Neuron:
         total = np.dot(self.weights, inputs) + self.bias
         return sigmoid(total)
 
-class NeuralNetwork:
+class OurNeuralNetwork:
     '''
-    - A simpel neural network with 2 inputs, a hidden layer with 2 neurons
-    - An output layer with one neuron
-    Each neuron has same weights and biases
-    - w = [0, 1]
-    - b = 0
+    - A simpel neural network with 2 inputs, a hidden layer with 2 neurons (h1, h2)
+    - An output layer with one neuron (o1)
+    
     '''
     def __init__(self):
-        weights = np.array([0, 1])
-        bias = 0
-
-        self.h1 = Neuron(weights, bias)         #First neuron of hidden layer
-        self.h2 = Neuron(weights, bias)         #Second neuron of hidden layer
-        self.o1 = Neuron(weights, bias)         #This is the output neuron
-        self.w1 = 
+        #Define the weights
+        self.w1 = np.random.normal()
+        self.w2 = np.random.normal()
+        self.w3 = np.random.normal()
+        self.w4 = np.random.normal()
+        self.w5 = np.random.normal()
+        self.w6 = np.random.normal()
     
-    def feedforward(self, x):
-        out_h1 = self.h1.feedforward(x)
-        out_h2 = self.h2.feedforward(x)
+        #Define random biases
+        self.b1 = np.random.normal()
+        self.b2 = np.random.normal()
+        self.b3 = np.random.normal()
 
-        #Inputs to o1 will be the outputs from h1 and h2
-        out_o1 = self.o1.feedforward(np.array([out_h1, out_h2]))
-        return out_o1
+    def feedforward(self, x):
+        h1 = sigmoid(self.w1 * x[0] + self.w2 * x[1] + self.b1)
+        h2 = sigmoid(self.w3 * x[0] + self.w4 * x[1] + self.b2)
+        o1 = sigmoid(self.w5 * h1 + self.w6 * h2 + self.b3)
+        return o1
 
 #Mean square error function for training
 def mse_loss(y_true, y_pred):
