@@ -9,6 +9,11 @@ def deriv_sigmoid(x):
     fx = sigmoid(x)
     return fx * (1 - fx)
 
+#Mean square error function for training
+def mse_loss(y_true, y_pred):
+    #y_true and y_pred are numpy arrays of same length
+    return ((y_true - y_pred)**2).mean()                #Mean square error
+
 class Neuron:
     def __init__(self, weights, bias):
         self.weights = weights
@@ -80,31 +85,52 @@ class OurNeuralNetwork:
                 d_ypred_d_h2 = self.w6 * deriv_sigmoid(sum_o1)
 
                 #Neuron h1
-                d_ypred_d_w1 = x[0] * deriv_sigmoid(sum_h1)
-                d_ypred_d_w2 = x[1] * deriv_sigmoid(sum_h1)
-                d_ypred_d_b1 = deriv_sigmoid(sum_h1)
+                d_h1_d_w1 = x[0] * deriv_sigmoid(sum_h1)
+                d_h1_d_w2 = x[1] * deriv_sigmoid(sum_h1)
+                d_h1_d_b1 = deriv_sigmoid(sum_h1)
 
                 #Neuron h2
-                d_ypred_d_w3 = x[0] * deriv_sigmoid(sum_h2)
-                d_ypred_d_w4 = x[1] * deriv_sigmoid(sum_h2)
-                d_ypred_d_b2 = deriv_sigmoid(sum_h2)
+                d_h2_d_w3 = x[0] * deriv_sigmoid(sum_h2)
+                d_h2_d_w4 = x[1] * deriv_sigmoid(sum_h2)
+                d_h2_d_b2 = deriv_sigmoid(sum_h2)
 
                 #Update the weights and biases
                 #Neuron h1
-                self.w1 = learn_rate * d_L_d_ypred * d_ypred_d_h1 * d_h1_d_w1
-                
+                self.w1 -= learn_rate * d_L_d_ypred * d_ypred_d_h1 * d_h1_d_w1
+                self.w2 -= learn_rate * d_L_d_ypred * d_ypred_d_h1 * d_h1_d_w2
+                self.b1 -= learn_rate * d_L_d_ypred * d_ypred_d_h1 * d_h1_d_b1
 
+                #Neuron h2
+                self.w3 -= learn_rate * d_L_d_ypred * d_ypred_d_h2 * d_h2_d_w3
+                self.w4 -= learn_rate * d_L_d_ypred * d_ypred_d_h2 * d_h2_d_w4
+                self.b2 -= learn_rate * d_L_d_ypred * d_ypred_d_h2 * d_h2_d_b2
 
-#Mean square error function for training
-def mse_loss(y_true, y_pred):
-    #y_true and y_pred are numpy arrays of same length
-    return ((y_true - y_pred)**2).mean()                #Mean square error
+                #Neuron o1
+                self.w5 -= learn_rate * d_L_d_ypred * d_ypred_d_w5
+                self.w6 -= learn_rate * d_L_d_ypred * d_ypred_d_w6
+                self.b3 -= learn_rate * d_L_d_ypred * d_ypred_d_b3
 
-y_true = np.array([1, 0, 0, 1])             #1 is male and 0 is female (refer photo in same folder for table)
-y_pred = np.array([0, 0, 0, 0])             #Assuming all as female
+                #Calculate the total loss at the end of each epoch
+                if epoch % 10 == 0:
+                    y_preds = np.apply_along_axis(self.feedforward, 1, data)
+                    loss = mse_loss(all_y_trues, y_preds)
+                    print("Epoch %d loss: %0.3f" % (epoch, loss))
 
-print(mse_loss(y_true, y_pred))
+#Define some example dataset
+data = np.array([
+    [-2, 1],            #Alice
+    [25, 6],            #bob
+    [17, 4],            #Charlie
+    [-15, -6],          #jen
+])
 
-# network = NeuralNetwork()
-# x = np.array([2, 3])
-# print(network.feedforward(x))
+all_y_trues = np.array([
+    1,          #Alice
+    0,
+    0,
+    1
+])
+
+#Train out network
+network = OurNeuralNetwork()
+network.train(data, all_y_trues)
