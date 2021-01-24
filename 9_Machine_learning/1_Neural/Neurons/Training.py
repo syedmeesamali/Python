@@ -45,6 +45,32 @@ class OurNeuralNetwork:
         o1 = sigmoid(self.w5 * h1 + self.w6 * h2 + self.b3)
         return o1
 
+    #Main training algorithm
+    def train(self, data, all_y_trues):
+        '''
+        - data is a (n x 2) numpy array, n = # of samples in the dataset.
+        - all_y_trues is a numpy array with n elements.
+        Elements in all_y_trues correspond to those in data.
+        '''
+        learn_rate = 0.1
+        epochs = 1000           #No. of iterations to check for solution
+        for epoch in range(epochs):
+            for x, y_true in zip(data, all_y_trues):
+                # -- carry out a feed forward
+                sum_h1 = self.w1 * x[0] + self.w2 * x[1] + self.b1
+                h1 = sigmoid(sum_h1)
+
+                sum_h2 = self.w3 * x[0] + self.w4 * x[1] + self.b2
+                h2 = sigmoid(sum_h2)
+
+                sum_o1 = self.w5 * h1 + self.w6 * h2 + self.b3
+                o1 = sigmoid(sum_o1)
+                y_pred = o1
+
+                #Calculate the partial derivatives
+                # -- Naming d_L / d_w1 is represented as "partial L / partial w1"
+                d_L_d_ypred = -2 * (y_true - y_pred)
+
 #Mean square error function for training
 def mse_loss(y_true, y_pred):
     #y_true and y_pred are numpy arrays of same length
