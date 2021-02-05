@@ -12,10 +12,14 @@ cv.imshow('Circle', circle)
 
 #Bitwise AND
 bitwise_and = cv.bitwise_and(rect, circle)
-cv.imshow('Bitwise AND', bitwise_and)
+#cv.imshow('Bitwise AND', bitwise_and)
 
 #Bitwise OR
 bitwise_or = cv.bitwise_or(rect, circle)
-cv.imshow('Bitwise OR', bitwise_or)
+#cv.imshow('Bitwise OR', bitwise_or)
+
+#Bitwise XOR
+bitwise_xor = cv.bitwise_xor(rect, circle)
+cv.imshow('Bitwise XOR', bitwise_xor)
 
 cv.waitKey(0)
