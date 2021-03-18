@@ -1,8 +1,8 @@
 from itertools import cycle
 import re
 
-messagews = raw_input("Enter plain text: ")
-key = int(raw_input("Enter shift key: "))-1
+messagews = input("Enter plain text: ")
+key = int(input("Enter shift key: "))-1
 list_alphabets=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 p_string = str(messagews)
 app_list = []
@@ -12,64 +12,61 @@ split = [i.capitalize() for i in split]
 lenlist=[]
 for x in split:
     lenlist.append(len(x))
-
 message=""
 for i in split:
-  message+=i
+    message+=i
 
 # number of elements as input 
 n = int(input("Enter number of shift letters : ")) 
-  
 # iterating till the range 
 for i in range(0, n): 
-    ele = raw_input("Enter alphabet " + str(i+1) +" : " ) 
+    ele = input("Enter alphabet " + str(i+1) +":" )
     app_list.append(ele)
-
  
 #spacel=[]
 for i in range(0,len(app_list)):
-  num = list_alphabets.index(app_list[i])
-  shift_key.append(num)
-  print(shift_key)
+    num = list_alphabets.index(app_list[i])
+    shift_key.append(num)
+    print(shift_key)
 
 newlist = [message[i:i + key] for i in range(0, len(message), key)]
-
-new_list=[]
+new_list = []   #List to hold chars without spaces
+#Remove all the white spaces if any
 for i in newlist:
-  string=i.replace(" ","")
-  new_list.append(string)
+    string = i.replace(" ","")
+    new_list.append(string)
 
+print(newlist)
+print(new_list)
 zip_list = zip(new_list, cycle(app_list))
-print zip_list
-#last tuple converted to list
-last_tuple = list(zip_list[-1])
-
-#last ele in last tuple
+print(zip_list)
+zipped = list(zip_list)
+print(zipped)
+last_tuple = zipped[-1]
 lele = last_tuple[-1]
-
 
 if len(last_tuple[0]) != key:
     del last_tuple[-1]
-    del zip_list[-1]
+    del lele[-1]
     zip_list.extend(last_tuple)
 
 #converts tuple array to list
 res = [''.join(i) for i in zip_list] 
 rest=[]
-print res
+print(res)
 for i in res:
     rest.append(i.lower())
-print rest
+print(rest)
 #converts list to string
 str1 = ''.join(res)
-print "str1: " + str1
+print("str1: " + str1)
 capital_final = re.sub('([A-Z])', r' \1', str1)
 final_string = capital_final.lower()
 final_string.strip()
 def find_space(s, ch):
     return [i for i, ltr in enumerate(s) if ltr == ch]
 space_list = find_space(final_string, " ")
-space_list.pop(0)
+#space_list.pop(0)
 print("Your new shifted text is: " + final_string + "\n")
 
 space_list = [x-1 for x in space_list]
@@ -77,7 +74,9 @@ space =[]
 for x in range(0,len(space_list)):
     space.append(space_list[x] -x) 
 
-letter_map = {'a': 'h', 'b': 'i', 'c': 'l', 'd': 'w', 'e': 'm', 'f': 'k', 'g': 'b', 'h': 'd', 'i': 'p', 'j': 'c', 'k': 'v', 'l': 'a', 'm': 'z', 'n': 'u', 'o': 's', 'p': 'j', 'q': 'g', 'r': 'r', 's': 'y', 't': 'n', 'u': 'q', 'v': 'x', 'w': 'o', 'x': 'f', 'y': 't', 'z': 'e'}
+letter_map = {'a': 'h', 'b': 'i', 'c': 'l', 'd': 'w', 'e': 'm', 'f': 'k', 'g': 'b', 'h': 'd', 'i': 'p', 
+'j': 'c', 'k': 'v', 'l': 'a', 'm': 'z', 'n': 'u', 'o': 's', 'p': 'j', 'q': 'g', 'r': 'r', 's': 'y', 't': 'n', 
+'u': 'q', 'v': 'x', 'w': 'o', 'x': 'f', 'y': 't', 'z': 'e'}
 
 def subst_cipher(letter_map, text):
     return "".join(letter_map.get(c, " ") for c in text)
