@@ -3,18 +3,20 @@ import re
 
 messagews = input("Enter plain text: ")
 key = int(input("Enter shift key: "))-1
-list_alphabets=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+
+list_alphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n',
+'o','p','q','r','s','t','u','v','w','x','y','z']
 p_string = str(messagews)
 app_list = []
 shift_key = []
 split = p_string.split()
 split = [i.capitalize() for i in split]
-lenlist=[]
+lenlist = []
 for x in split:
     lenlist.append(len(x))
-message=""
+message = ""
 for i in split:
-    message+=i
+    message += i
 
 # number of elements as input 
 n = int(input("Enter number of shift letters : ")) 
@@ -24,7 +26,7 @@ for i in range(0, n):
     app_list.append(ele)
  
 #spacel=[]
-for i in range(0,len(app_list)):
+for i in range(0, len(app_list)):
     num = list_alphabets.index(app_list[i])
     shift_key.append(num)
 
@@ -83,8 +85,8 @@ first_part = subst_cipher(letter_map, str(rest[0]))
 print("Unrotated round is: " + str1)
 print("Encrypted part 1 is: " + first_part + "\n")
 
-# all other rotated rounds + substitution with space considered
-enc_str=""
+#all other rotated rounds + substitution with space considered
+enc_str = ""
 for i in range(0, len(shift_key)):
     j = 0
     while(j < len(shift_key)):
@@ -100,12 +102,12 @@ for i in range(0, len(shift_key)):
     except:
         pass
     print(str_from_res)
-    enc_part=subst_cipher(dictionary,str_from_res.replace(" ",""))
+    enc_part = subst_cipher(dictionary,str_from_res.replace(" ",""))
     print("Encrypted part " + str(i+2) + " is: " + enc_part + "\n")
-    enc_str+=enc_part + " "
-    str1= rot_string
+    enc_str += enc_part + " "
+    str1 = rot_string
 
-enc=first_part + enc_str 
+enc = first_part + enc_str 
 enc = enc.replace(" ","")
 d = list(enc)
 for index,i in enumerate(space):
@@ -113,3 +115,6 @@ for index,i in enumerate(space):
 
 d = ''.join(d)
 print("Your encrypted string is: " + d)
+
+#To visualize the code line by line go to below website and paste the code as it is
+#http://www.pythontutor.com/visualize.html#mode=display
