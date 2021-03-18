@@ -2,7 +2,7 @@ from itertools import cycle
 import re
 
 messagews = input("Enter plain text: ")
-key = int(input("Enter shift key: "))-1
+key = int(input("Enter shift key: "))-1     #Because for SK=9 9th will be replaced
 
 list_alphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n',
 'o','p','q','r','s','t','u','v','w','x','y','z']
@@ -41,10 +41,11 @@ zip_list = zip(new_list, cycle(app_list))
 zipped = list(zip_list)
 last_tuple = zipped[-1]
 lele = last_tuple[-1]
-
+print(type(last_tuple))
 if len(last_tuple[0]) != key:
-    del last_tuple[-1]
-    del lele[-1]
+    # del (last_tuple[-1])
+    # del (lele[-1])
+
     zip_list.extend(last_tuple)
 
 #converts tuple array to list
