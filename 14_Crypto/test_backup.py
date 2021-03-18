@@ -27,6 +27,7 @@ for i in range(0, n):
 for i in range(0,len(app_list)):
     num = list_alphabets.index(app_list[i])
     shift_key.append(num)
+    print(shift_key)
 
 newlist = [message[i:i + key] for i in range(0, len(message), key)]
 new_list = []   #List to hold chars without spaces
@@ -35,8 +36,12 @@ for i in newlist:
     string = i.replace(" ","")
     new_list.append(string)
 
+print(newlist)
+print(new_list)
 zip_list = zip(new_list, cycle(app_list))
+print(zip_list)
 zipped = list(zip_list)
+print(zipped)
 last_tuple = zipped[-1]
 lele = last_tuple[-1]
 
@@ -46,12 +51,14 @@ if len(last_tuple[0]) != key:
     zip_list.extend(last_tuple)
 
 #converts tuple array to list
-res = [''.join(i) for i in zipped]      #zipped is the list derived from zip_list
+res = [''.join(i) for i in zip_list]
+print(res)
 rest = []
+print(rest)
 for i in res:
     rest.append(i.lower())      #Lower letters all saved in list ----- rest[]
 print(rest)
-str1 = ''.join(res)             #converts list to string
+str1 = ''.join(res)     #converts list to string
 print("str1: " + str1)
 capital_final = re.sub('([A-Z])', r' \1', str1)
 final_string = capital_final.lower()
@@ -69,6 +76,7 @@ for x in range(0, len(space_list)):
 letter_map = {'a': 'h', 'b': 'i', 'c': 'l', 'd': 'w', 'e': 'm', 'f': 'k', 'g': 'b', 'h': 'd', 'i': 'p', 
 'j': 'c', 'k': 'v', 'l': 'a', 'm': 'z', 'n': 'u', 'o': 's', 'p': 'j', 'q': 'g', 'r': 'r', 's': 'y', 't': 'n', 
 'u': 'q', 'v': 'x', 'w': 'o', 'x': 'f', 'y': 't', 'z': 'e'}
+
 def subst_cipher(letter_map, text):
     return "".join(letter_map.get(c, " ") for c in text)
 def leftrotate(s, d):
@@ -85,31 +93,30 @@ print("Encrypted part 1 is: " + first_part + "\n")
 
 # all other rotated rounds + substitution with space considered
 enc_str=""
-for i in range(0, len(shift_key)):
-    j = 0
-    while(j < len(shift_key)):
-        rot_string = rightrotate(str1, shift_key[i])
-        j = j + 1
-        print("Rotated round " + str(i+1) + " is: " + rot_string)  
-    final_list= [rot_string]
-    convert = str(final_list[0])
-    lmap = list(convert)
-    dictionary = dict(zip(list_alphabets, lmap))
-    try:
-        str_from_res= str(rest[i+1])
-    except:
-        pass
-    print(str_from_res)
-    enc_part=subst_cipher(dictionary,str_from_res.replace(" ",""))
-    print("Encrypted part " + str(i+2) + " is: " + enc_part + "\n")
-    enc_str+=enc_part + " "
-    str1= rot_string
+for i in range(0,len(shift_key)):
+  j = 0
+  while(j < len(shift_key) ):
+    rot_string = rightrotate(str1, shift_key[i])
+    j = j + 1
+  print("Rotated round " + str(i+1) + " is: " + rot_string)  
+  final_list= [rot_string]
+  convert=str(final_list[0])
+  lmap=list(convert)
+  dictionary = dict(zip(list_alphabets, lmap))
+  try:
+    str_from_res= str(rest[i+1])
+  except:
+    pass
+  print(str_from_res)
+  enc_part=subst_cipher(dictionary,str_from_res.replace(" ",""))
+  print("Encrypted part " + str(i+2) + " is: " + enc_part + "\n")
+  enc_str+=enc_part + " "
+  str1= rot_string
 
 enc=first_part + enc_str 
 enc = enc.replace(" ","")
 d = list(enc)
 for index,i in enumerate(space):
     d.insert(index + i, " ")
-
 d = ''.join(d)
 print("Your encrypted string is: " + d)
