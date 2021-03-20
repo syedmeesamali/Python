@@ -15,3 +15,5 @@ def wordListToDict(wordList):
     wordfreq = [wordList.count(p) for p in wordList]
     return dict(list(zip(wordList, wordfreq)))
 
+print(wordListToDict(list(string)))
+
