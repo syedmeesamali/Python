@@ -80,8 +80,8 @@ def replace_n(string_val, n, first=0):
 cstring = replace_n(without_space, key+1, first=-1)
 
 # ---------------------------------
-clist = map(str, cstring.split(' '))
-print(str(clist))
+clist = list(map(str, cstring.split(' ')))
+print(clist)
 new_list=[]
 for i in new_list:
   string=i.replace(" ","")
@@ -90,13 +90,9 @@ lower_list=[]
 for i in new_list:
     lower_list.append(i.lower())
 # -------------------------------
-
-# letter map for round #1 
 letter_map = {'h': 'a', 'i': 'b', 'l': 'c', 'w': 'd', 'm': 'e', 'k': 'f', 'b': 'g', 'd': 'h', 
 'p': 'i', 'c': 'j', 'v': 'k', 'a': 'l', 'z': 'm', 'u': 'n', 's': 'o', 'j': 'p', 'g': 'q', 
 'r': 'r', 'y': 's', 'n': 't', 'q': 'u', 'x': 'v', 'o': 'w', 'f': 'x', 't': 'y', 'e': 'z'}
-
-''' 3 functions for substituion and rotation of letter map'''
 def subst_cipher(letter_map, text):
     return "".join(letter_map.get(c, " ") for c in text)
 def leftrotate(s, d):
