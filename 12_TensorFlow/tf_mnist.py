@@ -11,7 +11,8 @@ N_hidden = 128
 Validation_Split = 0.2  #How much training is reserved for validation
 
 #Load MNIST, verify, and split for training and test
-mnist = keras.datasets.mnist(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+mnist = keras.datasets.mnist
+(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 
 reshaped = 784
 X_train = X_train.reshape(60000, reshaped)
@@ -27,3 +28,16 @@ print(X_test.shape[0], 'test samples')
 
 Y_train = tf.keras.utils.to_categorical(Y_train, NB_Classes)
 Y_test = tf.keras.utils.to_categorical(Y_test, NB_Classes)
+
+model = tf.keras.models.Sequential()
+model.add(keras.layers.Dense(NB_Classes, input_shape = (reshaped,), name= 'dense_layer', activation='softmax'))
+
+model.compile(optimizer='SGD', loss='categorical_crossentropy', metrics=['accuracy'])
+
+#Training the model
+model.fit(X_train, Y_train, batch_size=Batch_size, epochs=Epochs, verbose=Verbose, validation_split=Validation_Split)
+
+#Finally evaluate the model
+test_loss, test_acc = model.evaluate(X_test, Y_test)
+print('Test accuracy: ', test_acc)
+
