@@ -109,26 +109,28 @@ print("Decrypted part 1 is: " + first_part + "\n")
 
 # all other rotated rounds + substitution with space considered
 dec_str=""
-for i in range(0,len(clist)-1):
+for i in range(0, len(clist)-1):
   j = 0
-  while(j < len(clist) ):
+  while(j < len(clist)):
     rot_string = rightrotate(str1, shift_key[i])
     j = j + 1
   print("Rotated round " + str(i+1) + " is: " + rot_string)  
   final_list= [rot_string]
-  convert=str(final_list[0])
-  lmap=list(convert)
+  convert = str(final_list[0])
+  lmap = list(convert)
   dictionary1 = dict(zip(lmap,list_alphabets))
-  str_from_res= str(clist[i+1])
-  dec_part=subst_cipher(dictionary1,str_from_res)
+  try:
+    str_from_res= str(clist[i+1])
+  except:
+    pass
+  dec_part = subst_cipher(dictionary1,str_from_res)
   print("Decrypted part " + str(i+2) + " is: " + dec_part + "\n")
-  dec_str+=dec_part + " "
-  str1= rot_string
+  dec_str += dec_part + " "
+  str1 = rot_string
   
-dec=first_part + dec_str 
+dec = first_part + dec_str 
 d = dec.replace(" ","")
 d = list(d)
-# slist=[5,8,11,15,23,25] ---> correct list for green car
 for index,i in enumerate(space):
     d.insert(index + i, " ")
 d = ''.join(d)

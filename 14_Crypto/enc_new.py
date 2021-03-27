@@ -40,8 +40,24 @@ lele = last_tuple[-1]
 #zipped.pop()     #Last element checks
 if len(last_tuple[0]) != key:
     zipped.extend(list_last_tuple)
-#zipped.pop()
+
+#-----
+rep=[]
+mod = int(len(zipped)/len(app_list))
+for x in range(0,mod):
+  for y in range(0,len(app_list)):
+    rep.append(app_list[y])
+print("rep")
+print (rep)
+shift_keys=[]
+for i in range(0, len(rep)):
+    num = list_alphabets.index(rep[i])
+    shift_keys.append(num)
+print(shift_keys)
+#----
+
 print(zipped)
+print (len(zipped))
 res = [''.join(i) for i in zipped]
 rest = []
 for i in res:
@@ -57,7 +73,7 @@ space_list = find_space(final_string, " ")
 #space_list.pop(0)
 print("Your new shifted text is: " + final_string + "\n")
 space_list = [x-1 for x in space_list]
-space = []
+space =[]
 for x in range(0, len(space_list)):
     space.append(space_list[x] -x)
 
@@ -78,13 +94,13 @@ print("Unrotated round is: " + str1)
 print("Encrypted part 1 is: " + first_part + "\n")
 
 enc_str = ""
-for i in range(0, len(shift_key)):
+for i in range(0, len(shift_keys)):
     j = 0
-    while(j < len(shift_key)):
-        rot_string = rightrotate(str1, shift_key[i])
+    while(j < len(shift_keys)):
+        rot_string = rightrotate(str1, shift_keys[i])
         j = j + 1
     print("Rotated round " + str(i+1) + " is: " + rot_string)    
-    final_list = [rot_string]
+    final_list= [rot_string]
     convert = str(final_list[0])
     lmap = list(convert)
     dictionary = dict(zip(list_alphabets, lmap))
