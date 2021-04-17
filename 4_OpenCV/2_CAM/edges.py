@@ -24,5 +24,8 @@ cv.imshow('Sobel X', sobelx)
 cv.imshow('Sobel Y', sobely)
 cv.imshow('Combined', combined_sobel)
 
+canny = cv.Canny(gray, 150, 175)
+cv.imshow('Canny', canny)
+
 cv.waitKey(0)
 cv.destroyAllWindows()
