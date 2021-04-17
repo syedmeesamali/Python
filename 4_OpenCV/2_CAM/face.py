@@ -8,7 +8,7 @@ cv.imshow('gray', gray)
 
 haar_cascade = cv.CascadeClassifier('haarcascade.xml')
 
-faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor = 1.1, minNeighbors = 3)
+faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor = 1.1, minNeighbors = 2)
 
 print(f'No of faces found = {len(faces_rect)}')
 for (x, y, w, h) in faces_rect:
