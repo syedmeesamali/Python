@@ -2,8 +2,8 @@ import os
 import cv2 as cv
 import numpy as np
 
-people = []
-DIR = r'C:\Users\.....path here'
+people = ['Ahsin', 'Meesam']
+DIR = r'C:\Users\SYED\Downloads\Family'
 
 haar_cascade = cv.CascadeClassifier('haarcascade.xml')
 
@@ -25,4 +25,17 @@ def create_train():
                 labels.append(label)
 
 create_train()
-print(f'Ran successfully!')
+print('Training has been completed ------- !')
+#print(f'Length of features : {len(features)}')
+#print(f'Length of labels : {len(labels)}')
+features = np.array(features, dtype='object')
+labels = np.array(labels)
+
+
+face_recognizer = cv.face.LBPHFaceRecognizer_create()
+
+#Train the recognizer on features and labels acquired above
+face_recognizer.train(features, labels)
+face_recognizer.save('face_trained.yml')
+np.save('features.npy', features)
+np.save('labels.npy', labels)
