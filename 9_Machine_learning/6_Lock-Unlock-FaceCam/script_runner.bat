@@ -1,1 +1,0 @@
-"C:\Users\SYED\AppData\Local\Programs\Python\Python36\python.exe" "C:\Users\SYED\Desktop\Python\15_Lock-Unlock-FaceCam\3_lock_unlock_face.py" %*
