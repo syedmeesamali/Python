@@ -1,5 +1,6 @@
 import pygame
 import math
+import time
 from queue import PriorityQueue
 
 WIDTH = 800
@@ -29,3 +30,81 @@ class spot:
 
     def get_pos(self):
         return self.row, self.col
+    
+    def is_closed(self):
+        return self.color == red        #Square already visited
+
+    def is_open(self):
+        return self.color == green
+
+    def is_barrier(self):
+        return self.color == black
+    
+    def is_start(self):                 #Starting point for algorithm
+        return self.color == orange
+    
+    def is_end(self):
+        return self.color == purple
+    
+    def reset(self):                    #Reset all back to white
+        return self.color == white
+    
+    #Below are all to make the functions into particular categories
+    def make_closed(self):
+        self.color = red        #Make it visited
+
+    def make_open(self):
+        self.color = green
+
+    def make_barrier(self):
+        self.color = black
+    
+    def make_end(self):
+        self.color = purple
+    
+    def make_path(self):                    #Reset all back to white
+        self.color == turq
+    
+    def draw(self, win):
+        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
+    
+    def update_neighbors(self, grid):
+        pass
+
+    def __lt__(self, other):
+        return False
+
+#Heuristic function for point p1 and point p2 using manhattan distance
+def h(p1, p2):              
+    x1, y1 = p1
+    x2, y2 = p1
+    return abs(x1 - x2) * abs(y1 - y2)      #Distance function
+
+#Make the logical grid
+def make_grid(rows, width):
+    grid = []
+    gap = width // rows
+    for i in range(rows):
+        grid.append([])
+        for j in range(rows):
+            spot = Spot(i, j, gap, rows)
+            grid[i].append(spot)
+    return grid
+
+#ACtually draw the grid on screen
+def draw_grid(win, rows, width):
+    gap = width // rows
+    for i in range(rows):
+        pygame.draw.line(win, grey, (0, i * gap), (width, i * gap))
+        for j in range(rows):
+            pygame.draw.line(win, grey, (j * gap, 0), (j * gap, width))
+
+def draw(win, grid, rows, width):
+    win.fill(white)
+    for row in grid:
+        for spot in row:
+            spot.draw(win)
+    draw_grid(win, rows, width)
+    pygame.display.update()
+
+time.sleep(5) 
