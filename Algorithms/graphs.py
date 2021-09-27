@@ -17,7 +17,7 @@ orange = (255, 165, 0)
 grey = (128, 128, 128)
 turq = (64, 224, 208)
 
-class spot:
+class Spot:
     def __init__(self, row, col, width, total_rows):
         self.row = row
         self.col = col
@@ -78,7 +78,7 @@ class spot:
 def h(p1, p2):              
     x1, y1 = p1
     x2, y2 = p1
-    return abs(x1 - x2) * abs(y1 - y2)      #Distance function
+    return abs(x1 - x2) + abs(y1 - y2)      #Distance function
 
 #Make the logical grid
 def make_grid(rows, width):
@@ -107,4 +107,46 @@ def draw(win, grid, rows, width):
     draw_grid(win, rows, width)
     pygame.display.update()
 
-time.sleep(5) 
+def get_clicked_pos(pos, rows, width):
+    gap = width // rows
+    y, x = pos
+
+    row = y // gap
+    col = x // gap
+    return row, col
+
+#Main function to draw the game and start the processing
+def main(win, width):
+    ROWS = 50
+    grid = make_grid(ROWS, width)
+    start = None
+    end = None
+    run = True
+    started = False
+    while run:
+        draw(win, grid, ROWS, width)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if started:
+                continue
+            if pygame.mouse.get_pressed()[0]:           #left button pressed
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, ROWS, width)
+                spot = grid[row][col]
+                if not start:
+                    start = spot
+                    spot.make_start()
+                elif not end:
+                    end = spot
+                    end.make_end()
+                elif spot != end and spot != start:
+                    spot.make_barrier()
+            
+            elif pygame.mouse.get_pressed()[2]:         #right button pressed
+                pass
+    
+    pygame.quit()       #If cross is clicked
+
+#Run the main function
+main(WIN, WIDTH)
