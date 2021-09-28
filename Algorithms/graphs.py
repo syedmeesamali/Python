@@ -3,7 +3,7 @@ import math
 import time
 from queue import PriorityQueue
 
-WIDTH = 800
+WIDTH = 600
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* path finding algorithm")
 
@@ -50,6 +50,9 @@ class Spot:
         return self.color == white
     
     #Below are all to make the functions into particular categories
+    def make_start(self):
+        self.color = orange
+    
     def make_closed(self):
         self.color = red        #Make it visited
 
@@ -60,10 +63,10 @@ class Spot:
         self.color = black
     
     def make_end(self):
-        self.color = purple
+        self.color = turq
     
     def make_path(self):                    #Reset all back to white
-        self.color == turq
+        self.color == purple
     
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
@@ -77,7 +80,7 @@ class Spot:
 #Heuristic function for point p1 and point p2 using manhattan distance
 def h(p1, p2):              
     x1, y1 = p1
-    x2, y2 = p1
+    x2, y2 = p2
     return abs(x1 - x2) + abs(y1 - y2)      #Distance function
 
 #Make the logical grid
@@ -117,7 +120,7 @@ def get_clicked_pos(pos, rows, width):
 
 #Main function to draw the game and start the processing
 def main(win, width):
-    ROWS = 50
+    ROWS = 40
     grid = make_grid(ROWS, width)
     start = None
     end = None
@@ -136,7 +139,7 @@ def main(win, width):
                 spot = grid[row][col]
                 if not start:
                     start = spot
-                    spot.make_start()
+                    start.make_start()
                 elif not end:
                     end = spot
                     end.make_end()
