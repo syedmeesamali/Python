@@ -9,18 +9,27 @@ import argparse
 #prints homework title in large styled format
 tprint("homework2")
 
-parser = argparse.ArgumentParser(add_help=False)
+parser = argparse.ArgumentParser()
 
 subparser = parser.add_subparsers(dest='command')
-direct = subparser.add_parser('direct')
+#direct = subparser.add_parser('direct')
 parser.add_argument('-v', '--version', action='version',
                     version='This %(prog)s program is currently running on Version 1.0')
-parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
-                    help='You can either run this program directly or pass user input through the direct positional argument.')
 
-direct.add_argument('--yourname', type=str, required=True, help="Name for user")
-direct.add_argument('--start', type=int, required=True, help="Start Value")
-direct.add_argument('--end', type=int, required=True, help="End Value")         
+
+class make_about(argparse.Action):
+    def __call__(self, parser, args, values, option_string=None):
+        print("This python script was created by Shereena AlFaheem for CSEC 471 - Homework 2 on 9/30/2021.")
+        exit()
+
+parser.add_argument('-a', '--about', action=make_about, nargs="?", required = False, default='')
+
+#def print_about():
+#  print('This python script was created by Shereena AlFaheem for CSEC 471 - Homework 2 on 9/30/2021.')
+
+#direct.add_argument('--yourname', type=str, required=True, help="Name for user")
+#direct.add_argument('--start', type=int, required=True, help="Start Value")
+#direct.add_argument('--end', type=int, required=True, help="End Value")         
 args = parser.parse_args()
 
 if args.command == 'direct':
