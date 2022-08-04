@@ -1,12 +1,21 @@
-from selenium import webdriver
 import time
+from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
+import pyautogui
 
-def main():
-    # Your Facebook account user and password
-    usr = "enmail@gmail.com"
-    pwd = "some_pass"
-    grp = ['https://www.facebook.com/groups/521001902330400/', 'https://www.facebook.com/groups/grpid/']
+user = "mail@gmail.com"
+passwd = "pas23"
+s = Service('D:\SYED\data\chromedriver.exe')
+driver = webdriver.Chrome(service=s)
+
+def login(usr, pwd):    
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--incognito")
     chrome_options.add_experimental_option("detach", True)
@@ -14,8 +23,6 @@ def main():
     chrome_options.add_experimental_option("prefs", { \
         "profile.default_content_setting_values.notifications": 2  # 1:allow, 2:block
     })
-
-    driver = webdriver.Chrome(executable_path='D:/SYED/data/chromedriver.exe')
     driver.implicitly_wait(15)  # seconds
     # Go to facebook.com
     driver.get("http://www.facebook.com")
@@ -26,38 +33,29 @@ def main():
     elem.send_keys(pwd)
     elem.send_keys(Keys.RETURN)
     time.sleep(10)
-    for group in grp:
-        driver.get(group)
-        try:
-            try:
-                commentr = WebDriverWait(driver,10).until(EC.element_to_be_clickable( (By.XPATH, "//*[@name='xhpc_message_text']") ))
-                commentr.click()
-            except Exception:
-                commentr = WebDriverWait(driver,10).until(EC.element_to_be_clickable( (By.XPATH, "//*[@loggingname='status_tab_selector']") ))
-                commentr.click()
-            commentr = WebDriverWait(driver,10).until(EC.element_to_be_clickable( (By.XPATH, "//*[@class='_3u15']") ))
-            commentr.click()
-            time.sleep(3)
-            l = driver.find_elements_by_tag_name('input') 
-            time.sleep(3)
-            for g in l: 
-                if g==driver.find_element_by_xpath("//input[@type='file'][@class='_n _5f0v']"): 
-                    time.sleep(1)
-                    g.send_keys(ipath) 
-                    print('Image loaded')
-            time.sleep(10)
-            driver.find_element_by_xpath("//*[@class='_1mf _1mj']").send_keys(message)
-            time.sleep(3)
-            buttons = driver.find_elements_by_tag_name("button")
-            time.sleep(3)
-            for button in buttons:
-                if button.text == "Post":
-                    time.sleep(5)
-                    button.click()
-                    time.sleep(10)
-        except Exception:
-            pass
-            print ('Image not posted in: '+ group)
-    #driver.close()
+
+
+def post_content(post):
+    time.sleep(3) ## A 3 second break in the program so that everythin loads perfectly
+    new WebDriverWait(driver, 10).until(EC.elementToBeClickable(By.xpath("//div[text()='Sign Up']//ancestor::div[1]//preceding-sibling::img[1]"))).click();
+    driver.send_keys("Hello World of FB")
+    time.sleep(3) ## A 3 second break in the program so that everythin loads perfectly
+    actions= ActionChains(driver) ##Action Chains
+    actions.send_keys(Keys.TAB)  ##Press TAB
+    actions.send_keys(Keys.ENTER) ##Press ENTER
+    actions.send_keys(post)
+    actions.send_keys(Keys.TAB * 10)  ### Press TAB 10 Times to reach POST button
+    actions.send_keys(Keys.ENTER) ### Press ENTER to post the content on facebook
+    actions.perform()  ## To perfrom all the operations in the action chains
+    pass
+
+def main():
+    login(user, passwd)
+    try:
+        post_content('Hello from fb')
+    except Exception:
+        pass
+        print('Image not posted!')
+#driver.close()
 if __name__ == '__main__':
     main()
