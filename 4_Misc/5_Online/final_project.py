@@ -26,7 +26,7 @@ def is_valid_date(year, month, day):
             if day > 0 and day <= 31:
                 return True
     else:
-        return "ERROR!"
+        return False
 
 def days_between(year1, month1, day1, year2, month2, day2):
     """
@@ -43,9 +43,15 @@ def days_between(year1, month1, day1, year2, month2, day2):
       Returns 0 if either date is invalid or the second date is 
       before the first date.
     """
-    if year2 >= year1 and month2 >= month1 and day2 >= day1:
+    if year2 >= year1 or (year2 >= year1 and month2 >= month1) or (year2 >= year1 and month2 >= month1 and day2 >= day1):
         delta = dt.date(year2, month2, day2) - dt.date(year1, month1, day1)
         return delta.days
+    elif year1 > year2:
+        return 0
+    elif year1 < year2 and month1 > month2:
+        return 0
+    elif year1 < year2 and month1 < month2 and day1 > day2:
+        return 0
     else:
         return 0
 
@@ -64,10 +70,14 @@ def age_in_days(year, month, day):
     year_now = dt.date.today().year
     month_now = dt.date.today().month
     day_now = dt.date.today().day
+    print(str(year_now) + " _ " + str(month_now) + " _ " + str(day_now))
 
     if is_valid_date(year, month, day):
+        print("Date is valid")
         return days_between(year, month, day, year_now, month_now, day_now)
     else:
         return 0
 
-#print(age_in_days(1986, 6, 1))
+print(age_in_days(2016, 12, 31))
+print(days_between(1973, 8, 14, 1973, 8, 13))
+print(is_valid_date(0, 1, 1))
