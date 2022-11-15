@@ -5,7 +5,6 @@ def days_in_month(year, month):
       year  - an integer between datetime.MINYEAR and datetime.MAXYEAR
               representing the year
       month - an integer between 1 and 12 representing the month
-      
     Returns:
       The number of days in the input month.
     """
@@ -28,15 +27,20 @@ def is_valid_date(year, month, day):
       True if year-month-day is a valid date and
       False otherwise
     """
+    year_now = dt.date.today().year
+    month_now = dt.date.today().month
+    day_now = dt.date.today().day
+    newDate = dt.datetime(year, month, day)
+    date_now = dt.datetime(year_now, month_now, day_now)
     correctDate = None
-    try:
-        newDate = dt.datetime(year, month, day)
+    if newDate < date_now:
         correctDate = True
-        return True
-    except ValueError:
-        correctDate = False
+        if correctDate:
+            return True
+        else:
+            return False
+    else:
         return False
-    #return correctDate
 
 def leap_year(year):
     if year % 400 == 0:
@@ -62,20 +66,18 @@ def days_between(year1, month1, day1, year2, month2, day2):
       Returns 0 if either date is invalid or the second date is 
       before the first date.
     """
-    d1 = dt.date(year1, month1, day1)
-    d2 = dt.date(year2, month2, day2)
-    delta = d2 - d1
-    if (year2 >= year1 and month2 >= month1 and day2 >= day1):
-        print("Pass all 3")
-        return delta.days
-    elif (year2 < year1 and month2 >= month1 and day2 >= day1):
-        print("Pass all 2")
-        return delta.days
-    elif (year2 < year1 and month2 < month1 and day2 >= day1):
-        print("Pass all 1")
-        return delta.days
-    else:
-        return 0
+    
+    #Check date validity before carrying out delta
+    if is_valid_date(year1, month1, day1) and is_valid_date(year2, month2, day2):
+        d1 = dt.date(year1, month1, day1)
+        d2 = dt.date(year2, month2, day2)
+        delta = d2 - d1
+        if (year2 >= year1 and month2 >= month1 and day2 >= day1) or (year2 >= year1 and month2 >= month1 and day2 < day1):
+            return delta.days
+        elif (year2 < year1 and month2 < month1 and day2 >= day1) or (year2 < year1 and month2 >= month1 and day2 >= day1):
+            return delta.days
+        else:
+            return 0
 
 def age_in_days(year, month, day):
     """
@@ -94,14 +96,16 @@ def age_in_days(year, month, day):
     day_now = dt.date.today().day
     #print(str(year_now) + " _ " + str(month_now) + " _ " + str(day_now))
     if is_valid_date(year, month, day):
-        #print("Date is valid")
-        if days_between(year, month, day, year_now, month_now, day_now) >= 0:
-            return days_between(year, month, day, year_now, month_now, day_now)
+        print("Date is valid")
+        days_Val = days_between(year, month, day, year_now, month_now, day_now)
+        if days_Val > 0:
+            return days_Val
+        else:
+            return 0
     else:
         return 0
 
-#print(age_in_days(2022, 11, 12))
-#print(days_between(2017, 12, 31, 2018, 1, 1))
-#print(is_valid_date(2017, 2, 28))
-#print(days_in_month(2005, 2))
+print(age_in_days(2022, 11, 10))
+print(days_between(2022, 11, 10, 2022, 11, 15))
 print(days_between(2017, 12, 31, 2018, 1, 1))
+print(days_between(1973, 8, 14, 1973, 8, 13))
