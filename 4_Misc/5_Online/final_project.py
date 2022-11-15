@@ -22,21 +22,22 @@ def is_valid_date(year, month, day):
       year  - an integer representing the year
       month - an integer representing the month
       day   - an integer representing the day
-      
     Returns:
       True if year-month-day is a valid date and
       False otherwise
     """
-    year_now = dt.date.today().year
-    month_now = dt.date.today().month
-    day_now = dt.date.today().day
-    newDate = dt.datetime(year, month, day)
-    date_now = dt.datetime(year_now, month_now, day_now)
-    correctDate = None
-    if newDate < date_now:
-        correctDate = True
-        if correctDate:
-            return True
+    newDate = None
+    if (year >= 1 and year <= 9999):
+        if (month > 0 and month <= 12):
+            if (day > 0 and day <= 31):
+                try:
+                    newDate = dt.date(year, month, day)
+                    #date_now = dt.date.today()
+                    return True
+                except:
+                    return False
+            else:
+                return False
         else:
             return False
     else:
@@ -72,12 +73,12 @@ def days_between(year1, month1, day1, year2, month2, day2):
         d1 = dt.date(year1, month1, day1)
         d2 = dt.date(year2, month2, day2)
         delta = d2 - d1
-        if (year2 >= year1 and month2 >= month1 and day2 >= day1) or (year2 >= year1 and month2 >= month1 and day2 < day1):
-            return delta.days
-        elif (year2 < year1 and month2 < month1 and day2 >= day1) or (year2 < year1 and month2 >= month1 and day2 >= day1):
+        if delta.days > 0:
             return delta.days
         else:
             return 0
+    else:
+        return 0
 
 def age_in_days(year, month, day):
     """
@@ -96,7 +97,6 @@ def age_in_days(year, month, day):
     day_now = dt.date.today().day
     #print(str(year_now) + " _ " + str(month_now) + " _ " + str(day_now))
     if is_valid_date(year, month, day):
-        print("Date is valid")
         days_Val = days_between(year, month, day, year_now, month_now, day_now)
         if days_Val > 0:
             return days_Val
@@ -105,7 +105,13 @@ def age_in_days(year, month, day):
     else:
         return 0
 
-print(age_in_days(2022, 11, 10))
-print(days_between(2022, 11, 10, 2022, 11, 15))
-print(days_between(2017, 12, 31, 2018, 1, 1))
-print(days_between(1973, 8, 14, 1973, 8, 13))
+#print(days_between(2022, 11, 10, 2022, 11, 15))
+#print(days_between(2017, 12, 31, 2018, 1, 1))
+#print(days_between(1973, 8, 14, 1973, 8, 13))
+#print(age_in_days(2022, 11, 10))
+#print(age_in_days(0, 1, 21))
+#print(days_between(20000, 1, 1, 2047, 8, 2))
+#print(is_valid_date(9998, 12, 31))
+#print(age_in_days(1, 1, 1))
+#print(days_between(2032, 2, 31, 1322, 9, 16))
+#print(is_valid_date(0, 1, 1))
