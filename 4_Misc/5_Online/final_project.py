@@ -115,3 +115,9 @@ def age_in_days(year, month, day):
 #print(age_in_days(1, 1, 1))
 #print(days_between(2032, 2, 31, 1322, 9, 16))
 #print(is_valid_date(0, 1, 1))
+
+
+print(days_in_month(1986, 5))
+print(days_in_month(2011, 11))
+print(days_in_month(2024, 2))
+
