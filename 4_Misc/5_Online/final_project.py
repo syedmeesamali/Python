@@ -106,18 +106,17 @@ def age_in_days(year, month, day):
         return 0
 
 #print(days_between(2022, 11, 10, 2022, 11, 15))
-#print(days_between(2017, 12, 31, 2018, 1, 1))
-#print(days_between(1973, 8, 14, 1973, 8, 13))
+
+
 #print(age_in_days(2022, 11, 10))
 #print(age_in_days(0, 1, 21))
-#print(days_between(20000, 1, 1, 2047, 8, 2))
 #print(is_valid_date(9998, 12, 31))
 #print(age_in_days(1, 1, 1))
 #print(days_between(2032, 2, 31, 1322, 9, 16))
 #print(is_valid_date(0, 1, 1))
 
 
-print(days_in_month(1986, 5))
-print(days_in_month(2011, 11))
-print(days_in_month(2024, 2))
+print(days_between(20000, 1, 1, 2047, 8, 2))
+print(days_between(1973, 8, 14, 1973, 8, 13))
+print(days_between(2017, 12, 31, 2018, 1, 1))
 
