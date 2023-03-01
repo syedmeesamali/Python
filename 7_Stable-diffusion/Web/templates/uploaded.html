@@ -1,0 +1,28 @@
+{% extends 'base_blog.html' %}
+{% block title %} Uploaded Files {% endblock %}
+{% block article_content %}
+<!-- MAIN ARTICLE -->
+        <p><br><br>
+        <div class="text-center text-danger"><h1>Uploaded Files</h1></div>
+        </p>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="row">
+                  <th class="col-sm-2">ID</th>
+                  <th class="col-sm-5">Name </th>
+                  <th class="col-sm-5">Image (if image) </th>
+              </tr>
+            </thead>
+            <tbody>
+             {% for name in image_names %}
+             <tr class="row">
+              <td class="col-sm-2"> {{ loop.index }} </td>
+              <td class="col-sm-2"> <a href="{{ url_for('download', filename = name) }}">{{ name }}</a></td>
+              <td class="col-sm-8"> <img src="{{ url_for('static', filename='uploads/' + name) }}" width="500" height="350"></td>
+             </tr>
+            </tbody>
+             {% endfor %}
+          </table>
+
+<!-- END ARTICLE -->
+{% endblock %}

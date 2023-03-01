@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title>{% block title %} My Website {% endblock %}</title>
+	<!-- STYLESHEETS -->
+	<link rel="shortcut icon" type="image/png" href="../static/favicon_io/favicon.ico" />
+	<link rel="stylesheet" href="../static/styles/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/styles/templatemo-style.css">
+	<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<!-- START NAVIGATION -->
+<div class="navbar-default navbar-fixed-top sticky-navigation" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button class="navbar-toggle" data-toggle="collapse" data-target="#rock-navigation">
+				<span class="icon icon-bar"></span>
+				<span class="icon icon-bar"></span>
+				<span class="icon icon-bar"></span>
+			</button>
+			<a href="#" class="navbar-brand">Syed's Profile</a>
+		</div>
+		<nav class="navbar-collapse" id="rock-navigation">
+			<ul class="nav navbar-nav navbar-right main-navigation text-uppercase">
+				<li><a href="{{ url_for('index') }}">Home</a></li>
+				<li><a href="#work" class="smoothScroll">My Work</a></li>
+				<li><a href="#portfolio" class="smoothScroll">Portfolio</a></li>
+				<li><a href="#resume" class="smoothScroll">Resume</a></li>
+				<li><a href="#contact" class="smoothScroll">Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
+<!-- END NAVIGATION -->
+
+
+
+<!-- MAIN WEBSITE CONTENT -->
+{% block content %}
+<div class="container"></div>
+{% endblock %}
+
+
+<!-- NO MORE PAGE CONTENT BEYOND THIS BLOCK -->
+{% block _scripts %}
+<!-- ONLY SPECIAL scripts to be pasted in this block-->
+{% endblock %}
+
+<script src="../static/js/jquery.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/smoothscroll.js"></script>
+<script src="../static/js/jquery.nav.js"></script>
+<script src="../static/js/isotope.js"></script>
+<script src="../static/js/imagesloaded.min.js"></script>
+<script src="../static/js/custom.js"></script>
+
+</body>
+</html>

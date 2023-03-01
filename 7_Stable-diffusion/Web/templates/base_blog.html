@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="robotics, AI, Kuka">
+	<meta name="description" content="">
+	<title>{% block title %} My Website {% endblock %}</title>
+	<!-- STYLESHEETS -->
+	<link rel="shortcut icon" type="image/png" href="../static/favicon_io/favicon.ico" />
+	<link rel="stylesheet" href="../static/styles/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/styles/my_template.css">
+</head>
+<body>
+	<!-- START NAVIGATION -->
+	<div class="navbar navbar-default navbar-fixed-top sticky-navigation bg-light" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" data-toggle="collapse" data-target="#rock-navigation">
+					<span class="icon icon-bar"></span>
+					<span class="icon icon-bar"></span>
+					<span class="icon icon-bar"></span>
+				</button>
+				<a class="navbar-brand">Syed's Technical Blog</a>
+			</div>
+			<nav class="collapse navbar-collapse" id="rock-navigation">
+				<ul class="nav navbar-nav navbar-right main-navigation text-uppercase">
+					<li><a href="{{ url_for('index') }}" class="smoothScroll">Home</a></li>
+					<li><a href="{{ url_for('blog') }}" class="smoothScroll">Blog</a></li>
+					<li><a href="{{ url_for('upload_image') }}" class="smoothScroll">Upload</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<!-- END NAVIGATION -->
+	{% block content %}
+	<div class="container">
+		{% block page_content %}
+		<div class="row">
+			<div class="col-md-4"> <!-- SIDE BAR -->
+				<h3>Our Sidebar</h3>
+				<div class="text-warning"><p class="text-muted"><h3>Articles</h3></div>
+				<ul style="list-style: none;">
+					<li>1_2021-07-22 <a href="{{ url_for('robotic_arm') }}"> Robotic Arm</a></li>
+					<li>2_2021-07-28 <a href="{{ url_for('otto_robot') }}"> Otto Robot</a></li>
+					<li>3_2021-07-30 <a href="{{ url_for('ble') }}"> BLE Sense</a></li>
+					<li>4_2021-10-06 <a href="{{ url_for('Links') }}"> Important Links</a></li>
+					<li>5_2021-10-07 <a href="{{ url_for('ros_1') }}"> ROS - MoveIt</a></li>
+					<li>6_2021-10-26 <a href="{{ url_for('unity_1') }}"> Unity3D</a></li>
+					<li>7_2021-11-07 <a href="{{ url_for('unity_2') }}"> Unity Game</a></li>
+					<li>8_2021-12-04 <a href="{{ url_for('todo') }}"> ToDo List</a></li>
+					<li>9_2022-01-15 <a href="{{ url_for('cam_rotate') }}"> Camera Base</a></li>
+					<li>10_2022-02-10 <a href="{{ url_for('robotic_arm_stepper') }}"> Robotic Arm (Stepper)</a></li>
+				</ul>
+				</p>
+					<img src="../static/img2/dystopia.jpg" width="250" height="300" />
+			</div> <!--End of SIDE BAR-->
+			<div class="col-md-8"> <!-- Place for main article - Other than sidebar -->
+				{% block article_content %}
+				{% endblock %}
+			</div> <!--End of main article div-->
+		{% endblock %}
+	</div>
+	{% endblock %}
+	<script src="../static/js/jquery.js"></script>
+	<script src="../static/js/filesize.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="robotics, AI, Kuka">
+	<meta name="description" content="">
+	<title>{% block title %} Past Profile {% endblock %}</title>
+	<!-- STYLESHEETS -->
+	<link rel="shortcut icon" type="image/png" href="../static/favicon_io/favicon.ico" />
+	<link rel="stylesheet" href="../static/styles/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/styles/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/styles/my_template.css">
+	<link rel="stylesheet" href="../static/styles/table_style.css">
+</head>
+
+<body>
+	<!-- START NAVIGATION -->
+	<div class="navbar navbar-default navbar-fixed-top sticky-navigation bg-light" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" data-toggle="collapse" data-target="#rock-navigation">
+					<span class="icon icon-bar"></span>
+					<span class="icon icon-bar"></span>
+					<span class="icon icon-bar"></span>
+				</button>
+				<a class="navbar-brand">Personal Profile</a>
+			</div>
+			<nav class="collapse navbar-collapse" id="rock-navigation">
+				<ul class="nav navbar-nav navbar-right main-navigation text-uppercase">
+					<li><a href="{{ url_for('index') }}" class="smoothScroll">Home</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<!-- END NAVIGATION -->
+	
+	{% block content %}
+	<div class="container">
+		{% block page_content %}
+		<div class="row">
+			<!-- MAIN ARTICLE -->
+			<div class="col-md-10"> 
+				{% block article_content %}
+				{% endblock %}
+			</div> 
+			<!--End of main article-->
+		{% endblock %}
+	</div>
+	{% endblock %}
+	
+	<script src="../static/js/jquery.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>
